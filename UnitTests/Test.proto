@@ -1,0 +1,68 @@
+﻿syntax = "proto3";
+
+package Test;
+
+option optimize_for = SPEED;
+
+message Mess
+{
+	double DoubleVal = 1;
+	float FloatVal = 2;
+	int32 Int32Val = 3;
+	int64 Int64Val = 4;
+	uint32 UInt32Val = 5;
+	uint64 UInt64Val = 6;
+	sint32 SInt32Val = 7;
+	sint64 SInt64Val = 8;
+	fixed32 Fixed32Val = 9;
+	fixed64 Fixed64Val = 10;
+	sfixed32 SFixed32Val = 11;
+	sfixed64 SFixed64Val = 12;
+	bool BoolVal = 13;
+	string StringVal = 14;
+	bytes BytesVal = 15;
+
+	repeated double DoubleArr = 101;
+	repeated float FloatArr = 102;
+	repeated int32 Int32Arr = 103;
+	repeated int64 Int64Arr = 104;
+	repeated uint32 UInt32Arr = 105;
+	repeated uint64 UInt64Arr = 106;
+	repeated sint32 SInt32Arr = 107;
+	repeated sint64 SInt64Arr = 108;
+	repeated fixed32 Fixed32Arr = 109;
+	repeated fixed64 Fixed64Arr = 110;
+	repeated sfixed32 SFixed32Arr = 111;
+	repeated sfixed64 SFixed64Arr = 112;
+	repeated bool BoolArr = 113;
+	repeated string StringArr = 114;
+	repeated bytes BytesArr = 115;
+
+	repeated double DoublePacked = 201 [packed=true];
+	repeated float FloatPacked = 202 [packed=true];
+	repeated int32 Int32Packed = 203 [packed=true];
+	repeated int64 Int64Packed = 204 [packed=true];
+	repeated uint32 UInt32Packed = 205 [packed=true];
+	repeated uint64 UInt64Packed = 206 [packed=true];
+	repeated sint32 SInt32Packed = 207 [packed=true];
+	repeated sint64 SInt64Packed = 208 [packed=true];
+	repeated fixed32 Fixed32Packed = 209 [packed=true];
+	repeated fixed64 Fixed64Packed = 210 [packed=true];
+	repeated sfixed32 SFixed32Packed = 211 [packed=true];
+	repeated sfixed64 SFixed64Packed = 212 [packed=true];
+	repeated bool BoolPacked = 213 [packed=true];
+}
+
+message SuperMess
+{
+	int32 Int32Val = 1;
+	Mess MessVal = 2; 
+
+	repeated double DoubleArr = 101;
+	repeated Mess MessArr = 102;
+
+	repeated int64 Int64Packed = 201 [packed=true];
+
+	string StringVal = 301;
+}
+
