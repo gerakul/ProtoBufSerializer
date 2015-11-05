@@ -11,6 +11,7 @@ namespace Gerakul.ProtoBufSerializer
     public class MessageDescriptor<T> where T : new()
     {
         private Dictionary<int, FieldSetting<T>> fieldSettings;
+        private Dictionary<uint, Action<T, BasicDeserializer>> readActionsByTag;
         private bool useHasValue;
         private Func<T, IEnumerable<int>> getterFieldNumsForSerialization;
         private Action<T, MessageReadData> actionOnMessageRead;
@@ -65,6 +66,14 @@ namespace Gerakul.ProtoBufSerializer
              Action<T, MessageReadData> actionOnMessageRead = null)
         {
             this.fieldSettings = fieldSettings.ToDictionary(x => x.FieldNum);
+
+            this.readActionsByTag = fieldSettings.ToDictionary(x => x.Tag, x => x.ReadActionWithoutTag);
+
+            foreach (var item in fieldSettings.Where(x => x.AltTag > 0))
+            {
+                this.readActionsByTag.Add(item.AltTag, item.AltReadActionWithoutTag);
+            }
+
             this.useHasValue = useHasValue;
             this.getterFieldNumsForSerialization = getterFieldNumsForSerialization;
             this.actionOnMessageRead = actionOnMessageRead;
@@ -152,10 +161,10 @@ namespace Gerakul.ProtoBufSerializer
                     {
                         var fnum = WireFormat.GetTagFieldNumber(tag);
 
-                        FieldSetting<T> set;
-                        if (fieldSettings.TryGetValue(fnum, out set))
+                        Action<T, BasicDeserializer> ra;
+                        if (readActionsByTag.TryGetValue(tag, out ra))
                         {
-                            set.ReadActionWithoutTag(value, deserializer);
+                            ra(value, deserializer);
                             readFieldNums.Add(fnum);
                         }
                         else
@@ -184,10 +193,10 @@ namespace Gerakul.ProtoBufSerializer
                         tag = deserializer.ReadTag();
                         var fnum = WireFormat.GetTagFieldNumber(tag);
 
-                        FieldSetting<T> set;
-                        if (fieldSettings.TryGetValue(fnum, out set))
+                        Action<T, BasicDeserializer> ra;
+                        if (readActionsByTag.TryGetValue(tag, out ra))
                         {
-                            set.ReadActionWithoutTag(value, deserializer);
+                            ra(value, deserializer);
                             readFieldNums.Add(fnum);
                         }
                         else
@@ -215,12 +224,10 @@ namespace Gerakul.ProtoBufSerializer
                     uint tag;
                     while ((tag = deserializer.ReadTag()) > 0)
                     {
-                        var fnum = WireFormat.GetTagFieldNumber(tag);
-
-                        FieldSetting<T> set;
-                        if (fieldSettings.TryGetValue(fnum, out set))
+                        Action<T, BasicDeserializer> ra;
+                        if (readActionsByTag.TryGetValue(tag, out ra))
                         {
-                            set.ReadActionWithoutTag(value, deserializer);
+                            ra(value, deserializer);
                         }
                         else
                         {
@@ -239,12 +246,11 @@ namespace Gerakul.ProtoBufSerializer
                     while (deserializer.stream.Position < limitPos)
                     {
                         tag = deserializer.ReadTag();
-                        var fnum = WireFormat.GetTagFieldNumber(tag);
 
-                        FieldSetting<T> set;
-                        if (fieldSettings.TryGetValue(fnum, out set))
+                        Action<T, BasicDeserializer> ra;
+                        if (readActionsByTag.TryGetValue(tag, out ra))
                         {
-                            set.ReadActionWithoutTag(value, deserializer);
+                            ra(value, deserializer);
                         }
                         else
                         {
