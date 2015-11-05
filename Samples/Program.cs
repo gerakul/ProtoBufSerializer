@@ -13,8 +13,8 @@ namespace Samples
     {
         static void Main(string[] args)
         {
-            //WriteSample();
-            ReadSample();
+            WriteSample();
+            //ReadSample();
         }
 
         public static void WriteSample()
@@ -41,8 +41,6 @@ namespace Samples
 
                 buff = ms.ToArray();
             }
-
-            var s = Convert.ToBase64String(buff);
         }
 
         public static void ReadSample()
