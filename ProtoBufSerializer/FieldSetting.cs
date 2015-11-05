@@ -176,10 +176,20 @@ namespace Gerakul.ProtoBufSerializer
                 (value, serializer, rt) =>
                 {
                     serializer.WriteRawTag(rt);
-                    embeddedDescriptor.WriteWithLength(valueGetter(value), serializer);
+
+                    using (var writer = embeddedDescriptor.CreateWriter(serializer.stream))
+                    {
+                        writer.WriteWithLength(valueGetter(value));
+                    }
                 },
 
-                (value, serializer) => valueSetter(value, embeddedDescriptor.ReadWithLen(serializer)),
+                (value, serializer) =>
+                {
+                    using (var reader = embeddedDescriptor.CreateReader(serializer.stream))
+                    {
+                        valueSetter(value, reader.ReadWithLen());
+                    }
+                },
                 hasValueFunc);
         }
 
@@ -286,10 +296,31 @@ namespace Gerakul.ProtoBufSerializer
         public static FieldSetting<T> CreateMessageArray<EmbeddedT>(int fieldNum, Func<T, IEnumerable<EmbeddedT>> valueGetter, Action<T, EmbeddedT> valueSetter,
             MessageDescriptor<EmbeddedT> embeddedDescriptor, Func<T, bool> hasValueFunc = null) where EmbeddedT : new()
         {
-            return CreateArray(fieldNum, WireType.LengthDelimited, valueGetter,
-                (value, serializer) => valueSetter(value, embeddedDescriptor.ReadWithLen(serializer)),
-                hasValueFunc,
-                (ser, val) => embeddedDescriptor.WriteWithLength(val, ser));
+            CheckFieldNum(fieldNum);
+            uint tag = WireFormat.MakeTag(fieldNum, WireType.LengthDelimited);
+            byte[] rawTag = WireFormat.GetTagBytes(tag);
+            return new FieldSetting<T>(fieldNum, tag, rawTag,
+
+                (value, serializer, rt) =>
+                {
+                    using (var writer = embeddedDescriptor.CreateWriter(serializer.stream))
+                    {
+                        foreach (var item in valueGetter(value))
+                        {
+                            serializer.WriteRawTag(rt);
+                            writer.WriteWithLength(item);
+                        };
+                    }
+                },
+
+                (value, serializer) =>
+                {
+                    using (var reader = embeddedDescriptor.CreateReader(serializer.stream))
+                    {
+                        valueSetter(value, reader.ReadWithLen());
+                    }
+                },
+                hasValueFunc);
         }
 
         #endregion

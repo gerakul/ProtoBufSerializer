@@ -8,15 +8,16 @@ using System.Threading.Tasks;
 
 namespace Gerakul.ProtoBufSerializer
 {
-    public class MessageDescriptor<T> : IDisposable where T : new()
+    public class MessageDescriptor<T> where T : new()
     {
         private Dictionary<int, FieldSetting<T>> fieldSettings;
         private bool useHasValue;
         private Func<T, IEnumerable<int>> getterFieldNumsForSerialization;
         private Action<T, MessageReadData> actionOnMessageRead;
 
-        private MessageWriter<T> writer;
-        private MessageReader<T> reader;
+        private Action<T, BasicSerializer> writeAction;
+        private Func<BasicDeserializer, T> readAction;
+        private Func<BasicDeserializer, int, T> lenLimitedReadAction;
         private bool initialized;
 
         public bool UseHasValue
@@ -82,9 +83,7 @@ namespace Gerakul.ProtoBufSerializer
 
         private void Initialize()
         {
-            // create writer
-            Action<T, BasicSerializer> writeAction;
-
+            // create write action
             if (useHasValue)
             {
                 if (getterFieldNumsForSerialization != null)
@@ -140,11 +139,7 @@ namespace Gerakul.ProtoBufSerializer
                 }
             }
 
-            writer = new MessageWriter<T>(writeAction);
-
-            // create reader
-            Func<BasicDeserializer, T> readAction;
-            Func<BasicDeserializer, int, T> lenLimitedReadAction;
+            // create read actions
             if (actionOnMessageRead != null)
             {
                 readAction = deserializer =>
@@ -266,8 +261,6 @@ namespace Gerakul.ProtoBufSerializer
                 };
             }
 
-            reader = new MessageReader<T>(readAction, lenLimitedReadAction);
-
             initialized = true;
         }
 
@@ -280,129 +273,98 @@ namespace Gerakul.ProtoBufSerializer
             }
         }
 
-        public void Write(T value, BasicSerializer serializer)
+        public MessageWriter<T> CreateWriter(Stream stream, bool ownStream = false)
         {
-            CheckInitialized();
-            writer.WriteMessage(value, serializer);
+            return new MessageWriter<T>(writeAction, stream, ownStream);
         }
 
-        public void Write(T value, Stream stream)
+        public MessageReader<T> CreateReader(Stream stream, bool ownStream = false)
         {
-            BasicSerializer ser = new BasicSerializer(stream);
-            Write(value, ser);
-        }
-
-        public void WriteWithLength(T value, BasicSerializer serializer)
-        {
-            CheckInitialized();
-            writer.WriteMessageWithLength(value, serializer);
-        }
-
-        public void WriteWithLength(T value, Stream stream)
-        {
-            BasicSerializer ser = new BasicSerializer(stream);
-            WriteWithLength(value, ser);
-        }
-
-        public T Read(BasicDeserializer deserializer)
-        {
-            CheckInitialized();
-            return reader.ReadMessage(deserializer);
-        }
-
-        public T Read(Stream stream)
-        {
-            BasicDeserializer deser = new BasicDeserializer(stream);
-            return Read(deser);
-        }
-
-        public T ReadWithLen(BasicDeserializer deserializer)
-        {
-            CheckInitialized();
-            return reader.ReadMessageWithLen(deserializer);
-        }
-
-        public T ReadWithLen(Stream stream)
-        {
-            BasicDeserializer deser = new BasicDeserializer(stream);
-            return ReadWithLen(deser);
-        }
-
-        public void Dispose()
-        {
-            if (writer != null)
-            {
-                writer.Dispose();
-            }
+            return new MessageReader<T>(readAction, lenLimitedReadAction, stream, ownStream);
         }
     }
 
     // Класс не потокобезопасный
-    internal class MessageWriter<T> : IDisposable
+    public class MessageWriter<T> : IDisposable
     {
-        private const int InternalBufferLen = 1024 * 1024;
-
         private Action<T, BasicSerializer> writeAction;
         private MemoryStream internalStream;
         private BasicSerializer internalSerializer;
+        private Stream stream;
+        private BasicSerializer serializer;
+        private bool ownStream;
 
-        internal MessageWriter(Action<T, BasicSerializer> writeAction)
+        internal MessageWriter(Action<T, BasicSerializer> writeAction, Stream stream, bool ownStream)
         {
             this.writeAction = writeAction;
-            this.internalStream = new MemoryStream(InternalBufferLen);
+            this.internalStream = new MemoryStream();
             this.internalSerializer = new BasicSerializer(this.internalStream);
+            this.stream = stream;
+            this.serializer = new BasicSerializer(stream);
+            this.ownStream = ownStream;
         }
 
-        public void WriteMessage(T value, BasicSerializer serializer)
+        public void Write(T value)
         {
             writeAction(value, serializer);
         }
 
-        public void WriteMessageWithLength(T value, BasicSerializer serializer)
+        public void WriteWithLength(T value)
         {
             internalStream.Position = 0;
             writeAction(value, internalSerializer);
 
             int len = (int)internalStream.Position;
             serializer.WriteLength(len);
-            serializer.stream.Write(internalStream.GetBuffer(), 0, len);
-
-            // не держим в памяти слишком большой буфер
-            if (len > InternalBufferLen)
-            {
-                this.internalStream.Close();
-                this.internalStream = new MemoryStream(InternalBufferLen);
-                this.internalSerializer = new BasicSerializer(this.internalStream);
-            }
+            stream.Write(internalStream.GetBuffer(), 0, len);
         }
 
         public void Dispose()
         {
             internalStream.Dispose();
+
+            if (ownStream)
+            {
+                stream.Dispose();
+            }
         }
     }
 
     // Класс не потокобезопасный
-    internal class MessageReader<T> where T : new ()
+    public class MessageReader<T> : IDisposable where T : new ()
     {
         private Func<BasicDeserializer, T> readAction;
         private Func<BasicDeserializer, int, T> lenLimitedReadAction;
+        private Stream stream;
+        private BasicDeserializer serializer;
+        private bool ownStream;
 
-        internal MessageReader(Func<BasicDeserializer, T> readAction, Func<BasicDeserializer, int, T> lenLimitedReadAction)
+        internal MessageReader(Func<BasicDeserializer, T> readAction, Func<BasicDeserializer, int, T> lenLimitedReadAction, Stream stream, bool ownStream)
         {
             this.readAction = readAction;
             this.lenLimitedReadAction = lenLimitedReadAction;
+            this.stream = stream;
+            this.serializer = new BasicDeserializer(stream);
+            this.ownStream = ownStream;
         }
 
-        public T ReadMessage(BasicDeserializer deserializer)
+        public T Read()
         {
-            return readAction(deserializer);
+            return readAction(serializer);
         }
 
-        public T ReadMessageWithLen(BasicDeserializer deserializer)
+        public T ReadWithLen()
         {
-            var len = deserializer.ReadLength();
-            return lenLimitedReadAction(deserializer, len);
+            var len = serializer.ReadLength();
+            return lenLimitedReadAction(serializer, len);
+        }
+
+        public void Dispose()
+        {
+            if (ownStream)
+            {
+                stream.Dispose();
+            }
         }
     }
 }
