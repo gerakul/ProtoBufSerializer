@@ -437,6 +437,11 @@ namespace Gerakul.ProtoBufSerializer
             return CreatePackedArray(fieldNum, valueGetter, valueSetter, hasValueFunc, (ser, val) => ser.WriteSFixed64(val), ser => ser.ReadSFixed64());
         }
 
+        public static FieldSetting<T> CreateBoolPackedArray(int fieldNum, Func<T, IEnumerable<bool>> valueGetter, Action<T, IEnumerable<bool>> valueSetter, Func<T, bool> hasValueFunc = null)
+        {
+            return CreatePackedArray(fieldNum, valueGetter, valueSetter, hasValueFunc, (ser, val) => ser.WriteBool(val), ser => ser.ReadBool());
+        }
+
         #endregion
 
         #endregion
