@@ -16,14 +16,14 @@ namespace Gerakul.ProtoBufSerializer
         public Action<T, BasicDeserializer> ReadActionWithoutTag { get; private set; }
         public Func<T, bool> HasValueFunc { get; private set; }
 
-        protected FieldSetting(int fieldNum, uint tag, byte[] rawTag,
+        protected FieldSetting(int fieldNum, uint tag,
             Action<T, BasicSerializer, byte[]> writeAction,
             Action<T, BasicDeserializer> readActionWithoutTag,
             Func<T, bool> hasValueFunc)
         {
             this.FieldNum = fieldNum;
             this.Tag = tag;
-            this.RawTag = rawTag;
+            this.RawTag = WireFormat.GetTagBytes(tag);
             this.WriteAction = writeAction;
             this.ReadActionWithoutTag = readActionWithoutTag;
             this.HasValueFunc = hasValueFunc;
@@ -45,8 +45,7 @@ namespace Gerakul.ProtoBufSerializer
         {
             CheckFieldNum(fieldNum);
             uint tag = WireFormat.MakeTag(fieldNum, wireType);
-            byte[] rawTag = WireFormat.GetTagBytes(tag);
-            return new FieldSetting<T>(fieldNum, tag, rawTag, writeAction, readActionWithoutTag, hasValueFunc);
+            return new FieldSetting<T>(fieldNum, tag, writeAction, readActionWithoutTag, hasValueFunc);
         }
 
         public static FieldSetting<T> CreateDouble(int fieldNum, Func<T, double> valueGetter, Action<T, double> valueSetter, Func<T, bool> hasValueFunc = null)
@@ -202,8 +201,7 @@ namespace Gerakul.ProtoBufSerializer
         {
             CheckFieldNum(fieldNum);
             uint tag = WireFormat.MakeTag(fieldNum, wireType);
-            byte[] rawTag = WireFormat.GetTagBytes(tag);
-            return new FieldSetting<T>(fieldNum, tag, rawTag,
+            return new FieldSetting<T>(fieldNum, tag,
 
                 (value, serializer, rt) =>
                 {
@@ -298,8 +296,7 @@ namespace Gerakul.ProtoBufSerializer
         {
             CheckFieldNum(fieldNum);
             uint tag = WireFormat.MakeTag(fieldNum, WireType.LengthDelimited);
-            byte[] rawTag = WireFormat.GetTagBytes(tag);
-            return new FieldSetting<T>(fieldNum, tag, rawTag,
+            return new FieldSetting<T>(fieldNum, tag,
 
                 (value, serializer, rt) =>
                 {
@@ -332,8 +329,7 @@ namespace Gerakul.ProtoBufSerializer
         {
             CheckFieldNum(fieldNum);
             uint tag = WireFormat.MakeTag(fieldNum, WireType.LengthDelimited);
-            byte[] rawTag = WireFormat.GetTagBytes(tag);
-            return new FieldSetting<T>(fieldNum, tag, rawTag,
+            return new FieldSetting<T>(fieldNum, tag,
 
                 (value, serializer, rt) =>
                 {
