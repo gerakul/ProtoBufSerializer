@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ProtoBufSerializer")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Flexibly configurable serialization and deserialization of protobuf format")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("gerakul")]
 [assembly: AssemblyProduct("ProtoBufSerializer")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
