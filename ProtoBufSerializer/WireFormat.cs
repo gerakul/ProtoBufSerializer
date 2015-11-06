@@ -48,7 +48,8 @@ namespace Gerakul.ProtoBufSerializer
 
         public static bool CheckFieldNumber(int fieldNumber)
         {
-            return fieldNumber <= MaxFieldNumber;
+            return fieldNumber <= MaxFieldNumber 
+                && (fieldNumber < 19000 || fieldNumber > 19999); // reserved numbers
         }
     }
 
