@@ -46,6 +46,8 @@
     <Compile Include="InvalidProtocolBufferException.cs" />
     <Compile Include="MessageDescriptor.cs" />
     <Compile Include="MessageReadData.cs" />
+    <Compile Include="MessageReader.cs" />
+    <Compile Include="MessageWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerializerHelper.cs" />
     <Compile Include="WireFormat.cs" />
