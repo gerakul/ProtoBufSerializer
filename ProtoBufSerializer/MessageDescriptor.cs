@@ -281,11 +281,13 @@ namespace Gerakul.ProtoBufSerializer
 
         public MessageWriter<T> CreateWriter(Stream stream, bool ownStream = false)
         {
+            CheckInitialized();
             return new MessageWriter<T>(writeAction, stream, ownStream);
         }
 
         public MessageReader<T> CreateReader(Stream stream, bool ownStream = false)
         {
+            CheckInitialized();
             return new MessageReader<T>(readAction, lenLimitedReadAction, stream, ownStream);
         }
     }
