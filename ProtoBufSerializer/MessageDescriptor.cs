@@ -290,5 +290,77 @@ namespace Gerakul.ProtoBufSerializer
             CheckInitialized();
             return new MessageReader<T>(readAction, lenLimitedReadAction, stream, ownStream);
         }
+
+        public T Read(byte[] message)
+        {
+            using (var r = CreateReader(new MemoryStream(message), true))
+            {
+                return r.Read();
+            }
+        }
+
+        public T ReadWithLen(byte[] message)
+        {
+            using (var r = CreateReader(new MemoryStream(message), true))
+            {
+                return r.ReadWithLen();
+            }
+        }
+
+        public IEnumerable<T> ReadLenDelimitedStream(byte[] messages)
+        {
+            using (var r = CreateReader(new MemoryStream(messages), true))
+            {
+                foreach (var item in r.ReadLenDelimitedStream())
+                {
+                    yield return item;
+                }
+            }
+        }
+
+        public byte[] Write(T value)
+        {
+            using (var ms = new MemoryStream())
+            {
+                using (var w = CreateWriter(ms))
+                {
+                    w.Write(value);
+                }
+
+                ms.Flush();
+
+                return ms.ToArray();
+            }
+        }
+
+        public byte[] WriteWithLength(T value)
+        {
+            using (var ms = new MemoryStream())
+            {
+                using (var w = CreateWriter(ms))
+                {
+                    w.WriteWithLength(value);
+                }
+
+                ms.Flush();
+
+                return ms.ToArray();
+            }
+        }
+
+        public byte[] WriteLenDelimitedStream(IEnumerable<T> values)
+        {
+            using (var ms = new MemoryStream())
+            {
+                using (var w = CreateWriter(ms))
+                {
+                    w.WriteLenDelimitedStream(values);
+                }
+
+                ms.Flush();
+
+                return ms.ToArray();
+            }
+        }
     }
 }

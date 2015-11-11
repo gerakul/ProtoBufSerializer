@@ -42,6 +42,14 @@ namespace Gerakul.ProtoBufSerializer
             stream.Write(internalStream.GetBuffer(), 0, len);
         }
 
+        public void WriteLenDelimitedStream(IEnumerable<T> values)
+        {
+            foreach (var item in values)
+            {
+                WriteWithLength(item);
+            }
+        }
+
         public void Dispose()
         {
             internalStream.Dispose();
