@@ -228,9 +228,9 @@ namespace Gerakul.ProtoBufSerializer
             return ReadRawVarint32(true);
         }
 
-        public int ReadLength()
+        public int ReadLength(bool zeroIfEndOfStream = false)
         {
-            return (int)ReadRawVarint32();
+            return (int)ReadRawVarint32(zeroIfEndOfStream);
         }
 
         public double ReadDouble()

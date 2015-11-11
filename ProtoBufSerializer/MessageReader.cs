@@ -36,6 +36,15 @@ namespace Gerakul.ProtoBufSerializer
             return lenLimitedReadAction(serializer, len);
         }
 
+        public IEnumerable<T> ReadLenDelimitedStream()
+        {
+            int len;
+            while ((len = serializer.ReadLength(true)) > 0)
+            {
+                yield return lenLimitedReadAction(serializer, len);
+            }
+        }
+
         public void Dispose()
         {
             if (ownStream)
