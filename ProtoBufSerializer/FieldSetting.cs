@@ -19,6 +19,18 @@ namespace Gerakul.ProtoBufSerializer
         public uint AltTag { get; private set; }
         public Action<T, BasicDeserializer> AltReadActionWithoutTag { get; private set; }
 
+        public byte[] GetRawTag()
+        {
+            byte[] newTag = new byte[RawTag.Length];
+
+            for (int i = 0; i < newTag.Length; i++)
+            {
+                newTag[i] = RawTag[i];
+            }
+
+            return newTag;
+        }
+
 
         protected FieldSetting(int fieldNum, uint tag,
             Action<T, BasicSerializer, byte[]> writeAction,
