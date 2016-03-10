@@ -14,7 +14,7 @@ namespace Samples
         static void Main(string[] args)
         {
             WriteSample();
-            //ReadSample();
+            ReadSample();
         }
 
         public static void WriteSample()
@@ -31,16 +31,7 @@ namespace Samples
 
             var roomDescriptor = Room.CreateDescriptor();
 
-            byte[] buff;
-            using (MemoryStream ms = new MemoryStream())
-            {
-                using (var writer = roomDescriptor.CreateWriter(ms))
-                {
-                    writer.Write(room);
-                }
-
-                buff = ms.ToArray();
-            }
+            byte[] buff = roomDescriptor.Write(room);
         }
 
         public static void ReadSample()
@@ -49,11 +40,7 @@ namespace Samples
 
             var roomDescriptor = Room.CreateDescriptor();
 
-            Room room;
-            using (var reader = roomDescriptor.CreateReader(new MemoryStream(buff), true))
-            {
-                room = reader.Read();
-            }
+            Room room = roomDescriptor.Read(buff);
         }
     }
 
