@@ -75,7 +75,7 @@ namespace UnitTests
             return mess;
         }
 
-        private static Test.Mess CreateTestMess()
+        public static Test.Mess CreateTestMess()
         {
             Test.Mess t = new Test.Mess()
             {

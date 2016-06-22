@@ -333,5 +333,38 @@ namespace Gerakul.ProtoBufSerializer
         {
             return (int)ReadRawVarint32();
         }
+
+        public IEnumerable<byte[]> ReadLenDelimited()
+        {
+            int len;
+            while ((len = ReadLength(true)) > 0)
+            {
+                byte[] buff = new byte[len];
+                ReadFromStream(buff, 0, buff.Length);
+                yield return buff;
+            }
+        }
+
+        public static IEnumerable<byte[]> ReadLenDelimited(Stream stream)
+        {
+            var ser = new BasicDeserializer(stream);
+            return ser.ReadLenDelimited();
+        }
+
+        public static IEnumerable<byte[]> ReadLenDelimited(byte[] buff)
+        {
+            using (var s = new MemoryStream(buff))
+            {
+                foreach (var item in ReadLenDelimited(s))
+                {
+                    yield return item;
+                }
+            }
+        }
+
+        public static byte[] GetLenRemovedMessage(byte[] buff)
+        {
+            return ReadLenDelimited(buff).First();
+        }
     }
 }

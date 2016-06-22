@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Linq;
 using Google.Protobuf;
+using Gerakul.ProtoBufSerializer;
 
 namespace UnitTests
 {
@@ -97,6 +98,35 @@ namespace UnitTests
         public void TestSerUnpackedDeserUnpacked()
         {
             Assert.IsTrue(TestHelper.SerializeAndDeserializeTest(TestHelper.CreateSuperMessAllUnpackedDescriptor(), TestHelper.CreateSuperMessAllUnpackedDescriptor()));
+        }
+
+        [TestMethod]
+        public void TestReadLenDelimited()
+        {
+            var messages = new Test.Mess[3];
+
+            messages[0] = TestHelper.CreateTestMess();
+            messages[0].DoubleVal = 1;
+
+            messages[1] = TestHelper.CreateTestMess();
+            messages[1].FloatVal = 1.1F;
+
+            messages[2] = TestHelper.CreateTestMess();
+            messages[2].Int32Arr.Add(int.MinValue);
+
+            var descr = TestHelper.CreateMessDescriptor();
+
+            var buff = descr.WriteLenDelimitedStream(messages);
+
+            var buffers = BasicDeserializer.ReadLenDelimited(buff).ToArray();
+
+            var messages1 = buffers.Select(x => descr.Read(x)).ToArray();
+
+            var eq1 = messages[0].Equals(messages1[0]);
+            var eq2 = messages[1].Equals(messages1[1]);
+            var eq3 = messages[2].Equals(messages1[2]);
+
+            Assert.IsTrue(eq1 && eq2 && eq3);
         }
     }
 }
