@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 namespace Gerakul.ProtoBufSerializer
 {
     // Класс не потокобезопасный
-    public class MessageReader<T> : IDisposable where T : new()
+    public class MessageReader<T> : IUntypedMessageReader, IDisposable where T : new()
     {
         private Func<BasicDeserializer, T> readAction;
         private Func<BasicDeserializer, int, T> lenLimitedReadAction;
@@ -52,5 +53,36 @@ namespace Gerakul.ProtoBufSerializer
                 stream.Dispose();
             }
         }
+
+        #region IUntypedMessageReader
+
+        object IUntypedMessageReader.Read()
+        {
+            return Read();
+        }
+
+        object IUntypedMessageReader.ReadWithLen()
+        {
+            return ReadWithLen();
+        }
+
+        IEnumerable IUntypedMessageReader.ReadLenDelimitedStream()
+        {
+            return ReadLenDelimitedStream();
+        }
+
+        void IDisposable.Dispose()
+        {
+            Dispose();
+        }
+
+        #endregion
+    }
+
+    public interface IUntypedMessageReader : IDisposable
+    {
+        object Read();
+        object ReadWithLen();
+        IEnumerable ReadLenDelimitedStream();
     }
 }

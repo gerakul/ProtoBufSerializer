@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 namespace Gerakul.ProtoBufSerializer
 {
     // Класс не потокобезопасный
-    public class MessageWriter<T> : IDisposable
+    public class MessageWriter<T> : IUntypedMessageWriter, IDisposable
     {
         private Action<T, BasicSerializer> writeAction;
         private MemoryStream internalStream;
@@ -59,5 +60,37 @@ namespace Gerakul.ProtoBufSerializer
                 stream.Dispose();
             }
         }
+
+        #region IUntypedMessageWriter
+
+        void IUntypedMessageWriter.Write(object value)
+        {
+            Write((T)value);
+        }
+
+        void IUntypedMessageWriter.WriteWithLength(object value)
+        {
+            WriteWithLength((T)value);
+        }
+
+        void IUntypedMessageWriter.WriteLenDelimitedStream(IEnumerable values)
+        {
+            WriteLenDelimitedStream(values.Cast<T>());
+        }
+
+        void IDisposable.Dispose()
+        {
+            Dispose();
+        }
+
+        #endregion
     }
+
+    public interface IUntypedMessageWriter : IDisposable
+    {
+        void Write(object value);
+        void WriteWithLength(object value);
+        void WriteLenDelimitedStream(IEnumerable values);
+    }
+
 }

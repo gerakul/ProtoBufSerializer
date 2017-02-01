@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Gerakul.ProtoBufSerializer
 {
-    public class MessageDescriptor<T> where T : new()
+    public class MessageDescriptor<T> : IUntypedMessageDescriptor where T : new()
     {
         private Dictionary<int, FieldSetting<T>> fieldSettings;
         private Dictionary<uint, Action<T, BasicDeserializer>> readActionsByTag;
@@ -362,5 +363,61 @@ namespace Gerakul.ProtoBufSerializer
                 return ms.ToArray();
             }
         }
+
+        #region IUntypedMessageDescriptor
+
+        IUntypedMessageWriter IUntypedMessageDescriptor.CreateWriter(Stream stream, bool ownStream)
+        {
+            return CreateWriter(stream, ownStream);
+        }
+
+        IUntypedMessageReader IUntypedMessageDescriptor.CreateReader(Stream stream, bool ownStream)
+        {
+            return CreateReader(stream, ownStream);
+        }
+
+        object IUntypedMessageDescriptor.Read(byte[] message)
+        {
+            return Read(message);
+        }
+
+        object IUntypedMessageDescriptor.ReadWithLen(byte[] message)
+        {
+            return ReadWithLen(message);
+        }
+
+        IEnumerable IUntypedMessageDescriptor.ReadLenDelimitedStream(byte[] message)
+        {
+            return ReadLenDelimitedStream(message);
+        }
+
+        byte[] IUntypedMessageDescriptor.Write(object value)
+        {
+            return Write((T)value);
+        }
+
+        byte[] IUntypedMessageDescriptor.WriteWithLength(object value)
+        {
+            return WriteWithLength((T)value);
+        }
+
+        byte[] IUntypedMessageDescriptor.WriteLenDelimitedStream(IEnumerable values)
+        {
+            return WriteLenDelimitedStream(values.Cast<T>());
+        }
+
+        #endregion
+    }
+
+    public interface IUntypedMessageDescriptor
+    {
+        IUntypedMessageWriter CreateWriter(Stream stream, bool ownStream = false);
+        IUntypedMessageReader CreateReader(Stream stream, bool ownStream = false);
+        object Read(byte[] message);
+        object ReadWithLen(byte[] message);
+        IEnumerable ReadLenDelimitedStream(byte[] message);
+        byte[] Write(object value);
+        byte[] WriteWithLength(object value);
+        byte[] WriteLenDelimitedStream(IEnumerable values);
     }
 }
