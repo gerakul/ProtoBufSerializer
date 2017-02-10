@@ -70,6 +70,34 @@ namespace Gerakul.ProtoBufSerializer
             return Remove(typeof(T), name);
         }
 
+        public IUntypedMessageDescriptor GetUntyped(Type argumentType, string name = "")
+        {
+            lock (lockObject)
+            {
+                var subDict = GetSubDict(argumentType, false);
+                if (subDict != null)
+                {
+                    IUntypedMessageDescriptor d;
+                    if (subDict.TryGetValue(name, out d))
+                    {
+                        return d;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public IUntypedMessageDescriptor GetUntyped<T>(string name = "")
+        {
+            return GetUntyped(typeof(T), name);
+        }
+
+        public MessageDescriptor<T> Get<T>(string name = "") where T : new()
+        {
+            return (MessageDescriptor<T>)GetUntyped(typeof(T), name);
+        }
+
         public IUntypedMessageDescriptor[] GetAll()
         {
             lock (lockObject)
