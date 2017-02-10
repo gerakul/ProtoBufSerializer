@@ -46,6 +46,7 @@
     <Compile Include="FieldSetting.cs" />
     <Compile Include="InvalidProtocolBufferException.cs" />
     <Compile Include="MessageDescriptor.cs" />
+    <Compile Include="MessageDescriptorContainer.cs" />
     <Compile Include="MessageReadData.cs" />
     <Compile Include="MessageReader.cs" />
     <Compile Include="MessageWriter.cs" />

@@ -420,4 +420,20 @@ namespace Gerakul.ProtoBufSerializer
         byte[] WriteWithLength(object value);
         byte[] WriteLenDelimitedStream(IEnumerable values);
     }
+
+    public static class UntypedMessageDescriptorExtensions
+    {
+        public static Type GetArgumentType(this IUntypedMessageDescriptor item)
+        {
+            var genArgs = item.GetType().GetGenericArguments();
+
+            if (genArgs.Length != 1)
+            {
+                throw new ArgumentException("Invalid number of generic arguments", nameof(item));
+            }
+
+            return genArgs.First();
+        }
+
+    }
 }
