@@ -42,6 +42,30 @@ namespace Gerakul.ProtoBufSerializer
             }
         }
 
+        public void AddRange(IEnumerable<MessageDescriptorEntry> entries)
+        {
+            lock (lockObject)
+            {
+                foreach (var item in entries)
+                {
+                    var subDict = GetSubDict(item.MessageDescriptor, true);
+                    subDict.Add(item.Name, item.MessageDescriptor);
+                }
+            }
+        }
+
+        public void AddRange(IEnumerable<IUntypedMessageDescriptor> descriptors)
+        {
+            lock (lockObject)
+            {
+                foreach (var item in descriptors)
+                {
+                    var subDict = GetSubDict(item, true);
+                    subDict.Add("", item);
+                }
+            }
+        }
+
         public bool Contains(Type argumentType, string name = "")
         {
             lock (lockObject)
@@ -120,7 +144,7 @@ namespace Gerakul.ProtoBufSerializer
         public IUntypedMessageDescriptor MessageDescriptor { get; private set; }
         public string Name { get; private set; }
 
-        internal MessageDescriptorEntry(IUntypedMessageDescriptor messageDescriptor, string name)
+        public MessageDescriptorEntry(IUntypedMessageDescriptor messageDescriptor, string name)
         {
             this.MessageDescriptor = messageDescriptor;
             this.Name = name;
