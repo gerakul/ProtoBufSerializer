@@ -425,7 +425,7 @@ namespace Gerakul.ProtoBufSerializer
     {
         public static Type GetArgumentType(this IUntypedMessageDescriptor item)
         {
-            var genArgs = item.GetType().GetGenericArguments();
+            var genArgs = item.GetType().GenericTypeArguments;
 
             if (genArgs.Length != 1)
             {

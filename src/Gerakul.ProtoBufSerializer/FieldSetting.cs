@@ -398,7 +398,15 @@ namespace Gerakul.ProtoBufSerializer
 
                         var len = (int)ms.Position;
                         serializer.WriteLength(len);
-                        serializer.stream.Write(ms.GetBuffer(), 0, len);
+                        ArraySegment<byte> buff;
+                        if (ms.TryGetBuffer(out buff))
+                        {
+                            serializer.stream.Write(buff.Array, 0, len);
+                        }
+                        else
+                        {
+                            throw new InvalidOperationException($"Unable to get buffer from {nameof(ms)}");
+                        }
                     }
                 },
 

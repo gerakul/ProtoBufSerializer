@@ -40,7 +40,16 @@ namespace Gerakul.ProtoBufSerializer
 
             int len = (int)internalStream.Position;
             serializer.WriteLength(len);
-            stream.Write(internalStream.GetBuffer(), 0, len);
+
+            ArraySegment<byte> buff;
+            if (internalStream.TryGetBuffer(out buff))
+            {
+                stream.Write(buff.Array, 0, len);
+            }
+            else
+            {
+                throw new InvalidOperationException($"Unable to get buffer from {nameof(internalStream)}");
+            }
         }
 
         public void WriteLenDelimitedStream(IEnumerable<T> values)

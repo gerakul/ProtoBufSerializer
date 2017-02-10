@@ -9,73 +9,78 @@ using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
 namespace Test {
 
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-  public static partial class Test {
+  /// <summary>Holder for reflection information generated from Test.proto</summary>
+  public static partial class TestReflection {
 
     #region Descriptor
+    /// <summary>File descriptor for Test.proto</summary>
     public static pbr::FileDescriptor Descriptor {
       get { return descriptor; }
     }
     private static pbr::FileDescriptor descriptor;
 
-    static Test() {
+    static TestReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgpUZXN0LnByb3RvEgRUZXN0IqAHCgRNZXNzEhEKCURvdWJsZVZhbBgBIAEo", 
-            "ARIQCghGbG9hdFZhbBgCIAEoAhIQCghJbnQzMlZhbBgDIAEoBRIQCghJbnQ2", 
-            "NFZhbBgEIAEoAxIRCglVSW50MzJWYWwYBSABKA0SEQoJVUludDY0VmFsGAYg", 
-            "ASgEEhEKCVNJbnQzMlZhbBgHIAEoERIRCglTSW50NjRWYWwYCCABKBISEgoK", 
-            "Rml4ZWQzMlZhbBgJIAEoBxISCgpGaXhlZDY0VmFsGAogASgGEhMKC1NGaXhl", 
-            "ZDMyVmFsGAsgASgPEhMKC1NGaXhlZDY0VmFsGAwgASgQEg8KB0Jvb2xWYWwY", 
-            "DSABKAgSEQoJU3RyaW5nVmFsGA4gASgJEhAKCEJ5dGVzVmFsGA8gASgMEhEK", 
-            "CURvdWJsZUFychhlIAMoARIQCghGbG9hdEFychhmIAMoAhIQCghJbnQzMkFy", 
-            "chhnIAMoBRIQCghJbnQ2NEFychhoIAMoAxIRCglVSW50MzJBcnIYaSADKA0S", 
-            "EQoJVUludDY0QXJyGGogAygEEhEKCVNJbnQzMkFychhrIAMoERIRCglTSW50", 
-            "NjRBcnIYbCADKBISEgoKRml4ZWQzMkFychhtIAMoBxISCgpGaXhlZDY0QXJy", 
-            "GG4gAygGEhMKC1NGaXhlZDMyQXJyGG8gAygPEhMKC1NGaXhlZDY0QXJyGHAg", 
-            "AygQEg8KB0Jvb2xBcnIYcSADKAgSEQoJU3RyaW5nQXJyGHIgAygJEhAKCEJ5", 
-            "dGVzQXJyGHMgAygMEhkKDERvdWJsZVBhY2tlZBjJASADKAFCAhABEhgKC0Zs", 
-            "b2F0UGFja2VkGMoBIAMoAkICEAESGAoLSW50MzJQYWNrZWQYywEgAygFQgIQ", 
-            "ARIYCgtJbnQ2NFBhY2tlZBjMASADKANCAhABEhkKDFVJbnQzMlBhY2tlZBjN", 
-            "ASADKA1CAhABEhkKDFVJbnQ2NFBhY2tlZBjOASADKARCAhABEhkKDFNJbnQz", 
-            "MlBhY2tlZBjPASADKBFCAhABEhkKDFNJbnQ2NFBhY2tlZBjQASADKBJCAhAB", 
-            "EhoKDUZpeGVkMzJQYWNrZWQY0QEgAygHQgIQARIaCg1GaXhlZDY0UGFja2Vk", 
-            "GNIBIAMoBkICEAESGwoOU0ZpeGVkMzJQYWNrZWQY0wEgAygPQgIQARIbCg5T", 
-            "Rml4ZWQ2NFBhY2tlZBjUASADKBBCAhABEhcKCkJvb2xQYWNrZWQY1QEgAygI", 
-            "QgIQASKYAQoJU3VwZXJNZXNzEhAKCEludDMyVmFsGAEgASgFEhsKB01lc3NW", 
-            "YWwYAiABKAsyCi5UZXN0Lk1lc3MSEQoJRG91YmxlQXJyGGUgAygBEhsKB01l", 
-            "c3NBcnIYZiADKAsyCi5UZXN0Lk1lc3MSGAoLSW50NjRQYWNrZWQYyQEgAygD", 
+            "CgpUZXN0LnByb3RvEgRUZXN0IqAHCgRNZXNzEhEKCURvdWJsZVZhbBgBIAEo",
+            "ARIQCghGbG9hdFZhbBgCIAEoAhIQCghJbnQzMlZhbBgDIAEoBRIQCghJbnQ2",
+            "NFZhbBgEIAEoAxIRCglVSW50MzJWYWwYBSABKA0SEQoJVUludDY0VmFsGAYg",
+            "ASgEEhEKCVNJbnQzMlZhbBgHIAEoERIRCglTSW50NjRWYWwYCCABKBISEgoK",
+            "Rml4ZWQzMlZhbBgJIAEoBxISCgpGaXhlZDY0VmFsGAogASgGEhMKC1NGaXhl",
+            "ZDMyVmFsGAsgASgPEhMKC1NGaXhlZDY0VmFsGAwgASgQEg8KB0Jvb2xWYWwY",
+            "DSABKAgSEQoJU3RyaW5nVmFsGA4gASgJEhAKCEJ5dGVzVmFsGA8gASgMEhEK",
+            "CURvdWJsZUFychhlIAMoARIQCghGbG9hdEFychhmIAMoAhIQCghJbnQzMkFy",
+            "chhnIAMoBRIQCghJbnQ2NEFychhoIAMoAxIRCglVSW50MzJBcnIYaSADKA0S",
+            "EQoJVUludDY0QXJyGGogAygEEhEKCVNJbnQzMkFychhrIAMoERIRCglTSW50",
+            "NjRBcnIYbCADKBISEgoKRml4ZWQzMkFychhtIAMoBxISCgpGaXhlZDY0QXJy",
+            "GG4gAygGEhMKC1NGaXhlZDMyQXJyGG8gAygPEhMKC1NGaXhlZDY0QXJyGHAg",
+            "AygQEg8KB0Jvb2xBcnIYcSADKAgSEQoJU3RyaW5nQXJyGHIgAygJEhAKCEJ5",
+            "dGVzQXJyGHMgAygMEhkKDERvdWJsZVBhY2tlZBjJASADKAFCAhABEhgKC0Zs",
+            "b2F0UGFja2VkGMoBIAMoAkICEAESGAoLSW50MzJQYWNrZWQYywEgAygFQgIQ",
+            "ARIYCgtJbnQ2NFBhY2tlZBjMASADKANCAhABEhkKDFVJbnQzMlBhY2tlZBjN",
+            "ASADKA1CAhABEhkKDFVJbnQ2NFBhY2tlZBjOASADKARCAhABEhkKDFNJbnQz",
+            "MlBhY2tlZBjPASADKBFCAhABEhkKDFNJbnQ2NFBhY2tlZBjQASADKBJCAhAB",
+            "EhoKDUZpeGVkMzJQYWNrZWQY0QEgAygHQgIQARIaCg1GaXhlZDY0UGFja2Vk",
+            "GNIBIAMoBkICEAESGwoOU0ZpeGVkMzJQYWNrZWQY0wEgAygPQgIQARIbCg5T",
+            "Rml4ZWQ2NFBhY2tlZBjUASADKBBCAhABEhcKCkJvb2xQYWNrZWQY1QEgAygI",
+            "QgIQASKYAQoJU3VwZXJNZXNzEhAKCEludDMyVmFsGAEgASgFEhsKB01lc3NW",
+            "YWwYAiABKAsyCi5UZXN0Lk1lc3MSEQoJRG91YmxlQXJyGGUgAygBEhsKB01l",
+            "c3NBcnIYZiADKAsyCi5UZXN0Lk1lc3MSGAoLSW50NjRQYWNrZWQYyQEgAygD",
             "QgIQARISCglTdHJpbmdWYWwYrQIgASgJQgJIAWIGcHJvdG8z"));
-      descriptor = pbr::FileDescriptor.InternalBuildGeneratedFileFrom(descriptorData,
+      descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedCodeInfo(null, new pbr::GeneratedCodeInfo[] {
-            new pbr::GeneratedCodeInfo(typeof(global::Test.Mess), new[]{ "DoubleVal", "FloatVal", "Int32Val", "Int64Val", "UInt32Val", "UInt64Val", "SInt32Val", "SInt64Val", "Fixed32Val", "Fixed64Val", "SFixed32Val", "SFixed64Val", "BoolVal", "StringVal", "BytesVal", "DoubleArr", "FloatArr", "Int32Arr", "Int64Arr", "UInt32Arr", "UInt64Arr", "SInt32Arr", "SInt64Arr", "Fixed32Arr", "Fixed64Arr", "SFixed32Arr", "SFixed64Arr", "BoolArr", "StringArr", "BytesArr", "DoublePacked", "FloatPacked", "Int32Packed", "Int64Packed", "UInt32Packed", "UInt64Packed", "SInt32Packed", "SInt64Packed", "Fixed32Packed", "Fixed64Packed", "SFixed32Packed", "SFixed64Packed", "BoolPacked" }, null, null, null),
-            new pbr::GeneratedCodeInfo(typeof(global::Test.SuperMess), new[]{ "Int32Val", "MessVal", "DoubleArr", "MessArr", "Int64Packed", "StringVal" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Test.Mess), global::Test.Mess.Parser, new[]{ "DoubleVal", "FloatVal", "Int32Val", "Int64Val", "UInt32Val", "UInt64Val", "SInt32Val", "SInt64Val", "Fixed32Val", "Fixed64Val", "SFixed32Val", "SFixed64Val", "BoolVal", "StringVal", "BytesVal", "DoubleArr", "FloatArr", "Int32Arr", "Int64Arr", "UInt32Arr", "UInt64Arr", "SInt32Arr", "SInt64Arr", "Fixed32Arr", "Fixed64Arr", "SFixed32Arr", "SFixed64Arr", "BoolArr", "StringArr", "BytesArr", "DoublePacked", "FloatPacked", "Int32Packed", "Int64Packed", "UInt32Packed", "UInt64Packed", "SInt32Packed", "SInt64Packed", "Fixed32Packed", "Fixed64Packed", "SFixed32Packed", "SFixed64Packed", "BoolPacked" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Test.SuperMess), global::Test.SuperMess.Parser, new[]{ "Int32Val", "MessVal", "DoubleArr", "MessArr", "Int64Packed", "StringVal" }, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   public sealed partial class Mess : pb::IMessage<Mess> {
     private static readonly pb::MessageParser<Mess> _parser = new pb::MessageParser<Mess>(() => new Mess());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<Mess> Parser { get { return _parser; } }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Test.Test.Descriptor.MessageTypes[0]; }
+      get { return global::Test.TestReflection.Descriptor.MessageTypes[0]; }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Mess() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Mess(Mess other) : this() {
       doubleVal_ = other.doubleVal_;
       floatVal_ = other.floatVal_;
@@ -122,12 +127,15 @@ namespace Test {
       boolPacked_ = other.boolPacked_.Clone();
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Mess Clone() {
       return new Mess(this);
     }
 
+    /// <summary>Field number for the "DoubleVal" field.</summary>
     public const int DoubleValFieldNumber = 1;
     private double doubleVal_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public double DoubleVal {
       get { return doubleVal_; }
       set {
@@ -135,8 +143,10 @@ namespace Test {
       }
     }
 
+    /// <summary>Field number for the "FloatVal" field.</summary>
     public const int FloatValFieldNumber = 2;
     private float floatVal_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public float FloatVal {
       get { return floatVal_; }
       set {
@@ -144,8 +154,10 @@ namespace Test {
       }
     }
 
+    /// <summary>Field number for the "Int32Val" field.</summary>
     public const int Int32ValFieldNumber = 3;
     private int int32Val_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int Int32Val {
       get { return int32Val_; }
       set {
@@ -153,8 +165,10 @@ namespace Test {
       }
     }
 
+    /// <summary>Field number for the "Int64Val" field.</summary>
     public const int Int64ValFieldNumber = 4;
     private long int64Val_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public long Int64Val {
       get { return int64Val_; }
       set {
@@ -162,8 +176,10 @@ namespace Test {
       }
     }
 
+    /// <summary>Field number for the "UInt32Val" field.</summary>
     public const int UInt32ValFieldNumber = 5;
     private uint uInt32Val_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public uint UInt32Val {
       get { return uInt32Val_; }
       set {
@@ -171,8 +187,10 @@ namespace Test {
       }
     }
 
+    /// <summary>Field number for the "UInt64Val" field.</summary>
     public const int UInt64ValFieldNumber = 6;
     private ulong uInt64Val_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ulong UInt64Val {
       get { return uInt64Val_; }
       set {
@@ -180,8 +198,10 @@ namespace Test {
       }
     }
 
+    /// <summary>Field number for the "SInt32Val" field.</summary>
     public const int SInt32ValFieldNumber = 7;
     private int sInt32Val_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int SInt32Val {
       get { return sInt32Val_; }
       set {
@@ -189,8 +209,10 @@ namespace Test {
       }
     }
 
+    /// <summary>Field number for the "SInt64Val" field.</summary>
     public const int SInt64ValFieldNumber = 8;
     private long sInt64Val_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public long SInt64Val {
       get { return sInt64Val_; }
       set {
@@ -198,8 +220,10 @@ namespace Test {
       }
     }
 
+    /// <summary>Field number for the "Fixed32Val" field.</summary>
     public const int Fixed32ValFieldNumber = 9;
     private uint fixed32Val_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public uint Fixed32Val {
       get { return fixed32Val_; }
       set {
@@ -207,8 +231,10 @@ namespace Test {
       }
     }
 
+    /// <summary>Field number for the "Fixed64Val" field.</summary>
     public const int Fixed64ValFieldNumber = 10;
     private ulong fixed64Val_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ulong Fixed64Val {
       get { return fixed64Val_; }
       set {
@@ -216,8 +242,10 @@ namespace Test {
       }
     }
 
+    /// <summary>Field number for the "SFixed32Val" field.</summary>
     public const int SFixed32ValFieldNumber = 11;
     private int sFixed32Val_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int SFixed32Val {
       get { return sFixed32Val_; }
       set {
@@ -225,8 +253,10 @@ namespace Test {
       }
     }
 
+    /// <summary>Field number for the "SFixed64Val" field.</summary>
     public const int SFixed64ValFieldNumber = 12;
     private long sFixed64Val_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public long SFixed64Val {
       get { return sFixed64Val_; }
       set {
@@ -234,8 +264,10 @@ namespace Test {
       }
     }
 
+    /// <summary>Field number for the "BoolVal" field.</summary>
     public const int BoolValFieldNumber = 13;
     private bool boolVal_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public bool BoolVal {
       get { return boolVal_; }
       set {
@@ -243,252 +275,314 @@ namespace Test {
       }
     }
 
+    /// <summary>Field number for the "StringVal" field.</summary>
     public const int StringValFieldNumber = 14;
     private string stringVal_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string StringVal {
       get { return stringVal_; }
       set {
-        stringVal_ = pb::Preconditions.CheckNotNull(value, "value");
+        stringVal_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
+    /// <summary>Field number for the "BytesVal" field.</summary>
     public const int BytesValFieldNumber = 15;
     private pb::ByteString bytesVal_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString BytesVal {
       get { return bytesVal_; }
       set {
-        bytesVal_ = pb::Preconditions.CheckNotNull(value, "value");
+        bytesVal_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
+    /// <summary>Field number for the "DoubleArr" field.</summary>
     public const int DoubleArrFieldNumber = 101;
     private static readonly pb::FieldCodec<double> _repeated_doubleArr_codec
         = pb::FieldCodec.ForDouble(810);
     private readonly pbc::RepeatedField<double> doubleArr_ = new pbc::RepeatedField<double>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<double> DoubleArr {
       get { return doubleArr_; }
     }
 
+    /// <summary>Field number for the "FloatArr" field.</summary>
     public const int FloatArrFieldNumber = 102;
     private static readonly pb::FieldCodec<float> _repeated_floatArr_codec
         = pb::FieldCodec.ForFloat(818);
     private readonly pbc::RepeatedField<float> floatArr_ = new pbc::RepeatedField<float>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<float> FloatArr {
       get { return floatArr_; }
     }
 
+    /// <summary>Field number for the "Int32Arr" field.</summary>
     public const int Int32ArrFieldNumber = 103;
     private static readonly pb::FieldCodec<int> _repeated_int32Arr_codec
         = pb::FieldCodec.ForInt32(826);
     private readonly pbc::RepeatedField<int> int32Arr_ = new pbc::RepeatedField<int>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> Int32Arr {
       get { return int32Arr_; }
     }
 
+    /// <summary>Field number for the "Int64Arr" field.</summary>
     public const int Int64ArrFieldNumber = 104;
     private static readonly pb::FieldCodec<long> _repeated_int64Arr_codec
         = pb::FieldCodec.ForInt64(834);
     private readonly pbc::RepeatedField<long> int64Arr_ = new pbc::RepeatedField<long>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<long> Int64Arr {
       get { return int64Arr_; }
     }
 
+    /// <summary>Field number for the "UInt32Arr" field.</summary>
     public const int UInt32ArrFieldNumber = 105;
     private static readonly pb::FieldCodec<uint> _repeated_uInt32Arr_codec
         = pb::FieldCodec.ForUInt32(842);
     private readonly pbc::RepeatedField<uint> uInt32Arr_ = new pbc::RepeatedField<uint>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<uint> UInt32Arr {
       get { return uInt32Arr_; }
     }
 
+    /// <summary>Field number for the "UInt64Arr" field.</summary>
     public const int UInt64ArrFieldNumber = 106;
     private static readonly pb::FieldCodec<ulong> _repeated_uInt64Arr_codec
         = pb::FieldCodec.ForUInt64(850);
     private readonly pbc::RepeatedField<ulong> uInt64Arr_ = new pbc::RepeatedField<ulong>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<ulong> UInt64Arr {
       get { return uInt64Arr_; }
     }
 
+    /// <summary>Field number for the "SInt32Arr" field.</summary>
     public const int SInt32ArrFieldNumber = 107;
     private static readonly pb::FieldCodec<int> _repeated_sInt32Arr_codec
         = pb::FieldCodec.ForSInt32(858);
     private readonly pbc::RepeatedField<int> sInt32Arr_ = new pbc::RepeatedField<int>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> SInt32Arr {
       get { return sInt32Arr_; }
     }
 
+    /// <summary>Field number for the "SInt64Arr" field.</summary>
     public const int SInt64ArrFieldNumber = 108;
     private static readonly pb::FieldCodec<long> _repeated_sInt64Arr_codec
         = pb::FieldCodec.ForSInt64(866);
     private readonly pbc::RepeatedField<long> sInt64Arr_ = new pbc::RepeatedField<long>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<long> SInt64Arr {
       get { return sInt64Arr_; }
     }
 
+    /// <summary>Field number for the "Fixed32Arr" field.</summary>
     public const int Fixed32ArrFieldNumber = 109;
     private static readonly pb::FieldCodec<uint> _repeated_fixed32Arr_codec
         = pb::FieldCodec.ForFixed32(874);
     private readonly pbc::RepeatedField<uint> fixed32Arr_ = new pbc::RepeatedField<uint>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<uint> Fixed32Arr {
       get { return fixed32Arr_; }
     }
 
+    /// <summary>Field number for the "Fixed64Arr" field.</summary>
     public const int Fixed64ArrFieldNumber = 110;
     private static readonly pb::FieldCodec<ulong> _repeated_fixed64Arr_codec
         = pb::FieldCodec.ForFixed64(882);
     private readonly pbc::RepeatedField<ulong> fixed64Arr_ = new pbc::RepeatedField<ulong>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<ulong> Fixed64Arr {
       get { return fixed64Arr_; }
     }
 
+    /// <summary>Field number for the "SFixed32Arr" field.</summary>
     public const int SFixed32ArrFieldNumber = 111;
     private static readonly pb::FieldCodec<int> _repeated_sFixed32Arr_codec
         = pb::FieldCodec.ForSFixed32(890);
     private readonly pbc::RepeatedField<int> sFixed32Arr_ = new pbc::RepeatedField<int>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> SFixed32Arr {
       get { return sFixed32Arr_; }
     }
 
+    /// <summary>Field number for the "SFixed64Arr" field.</summary>
     public const int SFixed64ArrFieldNumber = 112;
     private static readonly pb::FieldCodec<long> _repeated_sFixed64Arr_codec
         = pb::FieldCodec.ForSFixed64(898);
     private readonly pbc::RepeatedField<long> sFixed64Arr_ = new pbc::RepeatedField<long>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<long> SFixed64Arr {
       get { return sFixed64Arr_; }
     }
 
+    /// <summary>Field number for the "BoolArr" field.</summary>
     public const int BoolArrFieldNumber = 113;
     private static readonly pb::FieldCodec<bool> _repeated_boolArr_codec
         = pb::FieldCodec.ForBool(906);
     private readonly pbc::RepeatedField<bool> boolArr_ = new pbc::RepeatedField<bool>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<bool> BoolArr {
       get { return boolArr_; }
     }
 
+    /// <summary>Field number for the "StringArr" field.</summary>
     public const int StringArrFieldNumber = 114;
     private static readonly pb::FieldCodec<string> _repeated_stringArr_codec
         = pb::FieldCodec.ForString(914);
     private readonly pbc::RepeatedField<string> stringArr_ = new pbc::RepeatedField<string>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<string> StringArr {
       get { return stringArr_; }
     }
 
+    /// <summary>Field number for the "BytesArr" field.</summary>
     public const int BytesArrFieldNumber = 115;
     private static readonly pb::FieldCodec<pb::ByteString> _repeated_bytesArr_codec
         = pb::FieldCodec.ForBytes(922);
     private readonly pbc::RepeatedField<pb::ByteString> bytesArr_ = new pbc::RepeatedField<pb::ByteString>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<pb::ByteString> BytesArr {
       get { return bytesArr_; }
     }
 
+    /// <summary>Field number for the "DoublePacked" field.</summary>
     public const int DoublePackedFieldNumber = 201;
     private static readonly pb::FieldCodec<double> _repeated_doublePacked_codec
         = pb::FieldCodec.ForDouble(1610);
     private readonly pbc::RepeatedField<double> doublePacked_ = new pbc::RepeatedField<double>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<double> DoublePacked {
       get { return doublePacked_; }
     }
 
+    /// <summary>Field number for the "FloatPacked" field.</summary>
     public const int FloatPackedFieldNumber = 202;
     private static readonly pb::FieldCodec<float> _repeated_floatPacked_codec
         = pb::FieldCodec.ForFloat(1618);
     private readonly pbc::RepeatedField<float> floatPacked_ = new pbc::RepeatedField<float>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<float> FloatPacked {
       get { return floatPacked_; }
     }
 
+    /// <summary>Field number for the "Int32Packed" field.</summary>
     public const int Int32PackedFieldNumber = 203;
     private static readonly pb::FieldCodec<int> _repeated_int32Packed_codec
         = pb::FieldCodec.ForInt32(1626);
     private readonly pbc::RepeatedField<int> int32Packed_ = new pbc::RepeatedField<int>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> Int32Packed {
       get { return int32Packed_; }
     }
 
+    /// <summary>Field number for the "Int64Packed" field.</summary>
     public const int Int64PackedFieldNumber = 204;
     private static readonly pb::FieldCodec<long> _repeated_int64Packed_codec
         = pb::FieldCodec.ForInt64(1634);
     private readonly pbc::RepeatedField<long> int64Packed_ = new pbc::RepeatedField<long>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<long> Int64Packed {
       get { return int64Packed_; }
     }
 
+    /// <summary>Field number for the "UInt32Packed" field.</summary>
     public const int UInt32PackedFieldNumber = 205;
     private static readonly pb::FieldCodec<uint> _repeated_uInt32Packed_codec
         = pb::FieldCodec.ForUInt32(1642);
     private readonly pbc::RepeatedField<uint> uInt32Packed_ = new pbc::RepeatedField<uint>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<uint> UInt32Packed {
       get { return uInt32Packed_; }
     }
 
+    /// <summary>Field number for the "UInt64Packed" field.</summary>
     public const int UInt64PackedFieldNumber = 206;
     private static readonly pb::FieldCodec<ulong> _repeated_uInt64Packed_codec
         = pb::FieldCodec.ForUInt64(1650);
     private readonly pbc::RepeatedField<ulong> uInt64Packed_ = new pbc::RepeatedField<ulong>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<ulong> UInt64Packed {
       get { return uInt64Packed_; }
     }
 
+    /// <summary>Field number for the "SInt32Packed" field.</summary>
     public const int SInt32PackedFieldNumber = 207;
     private static readonly pb::FieldCodec<int> _repeated_sInt32Packed_codec
         = pb::FieldCodec.ForSInt32(1658);
     private readonly pbc::RepeatedField<int> sInt32Packed_ = new pbc::RepeatedField<int>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> SInt32Packed {
       get { return sInt32Packed_; }
     }
 
+    /// <summary>Field number for the "SInt64Packed" field.</summary>
     public const int SInt64PackedFieldNumber = 208;
     private static readonly pb::FieldCodec<long> _repeated_sInt64Packed_codec
         = pb::FieldCodec.ForSInt64(1666);
     private readonly pbc::RepeatedField<long> sInt64Packed_ = new pbc::RepeatedField<long>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<long> SInt64Packed {
       get { return sInt64Packed_; }
     }
 
+    /// <summary>Field number for the "Fixed32Packed" field.</summary>
     public const int Fixed32PackedFieldNumber = 209;
     private static readonly pb::FieldCodec<uint> _repeated_fixed32Packed_codec
         = pb::FieldCodec.ForFixed32(1674);
     private readonly pbc::RepeatedField<uint> fixed32Packed_ = new pbc::RepeatedField<uint>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<uint> Fixed32Packed {
       get { return fixed32Packed_; }
     }
 
+    /// <summary>Field number for the "Fixed64Packed" field.</summary>
     public const int Fixed64PackedFieldNumber = 210;
     private static readonly pb::FieldCodec<ulong> _repeated_fixed64Packed_codec
         = pb::FieldCodec.ForFixed64(1682);
     private readonly pbc::RepeatedField<ulong> fixed64Packed_ = new pbc::RepeatedField<ulong>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<ulong> Fixed64Packed {
       get { return fixed64Packed_; }
     }
 
+    /// <summary>Field number for the "SFixed32Packed" field.</summary>
     public const int SFixed32PackedFieldNumber = 211;
     private static readonly pb::FieldCodec<int> _repeated_sFixed32Packed_codec
         = pb::FieldCodec.ForSFixed32(1690);
     private readonly pbc::RepeatedField<int> sFixed32Packed_ = new pbc::RepeatedField<int>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> SFixed32Packed {
       get { return sFixed32Packed_; }
     }
 
+    /// <summary>Field number for the "SFixed64Packed" field.</summary>
     public const int SFixed64PackedFieldNumber = 212;
     private static readonly pb::FieldCodec<long> _repeated_sFixed64Packed_codec
         = pb::FieldCodec.ForSFixed64(1698);
     private readonly pbc::RepeatedField<long> sFixed64Packed_ = new pbc::RepeatedField<long>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<long> SFixed64Packed {
       get { return sFixed64Packed_; }
     }
 
+    /// <summary>Field number for the "BoolPacked" field.</summary>
     public const int BoolPackedFieldNumber = 213;
     private static readonly pb::FieldCodec<bool> _repeated_boolPacked_codec
         = pb::FieldCodec.ForBool(1706);
     private readonly pbc::RepeatedField<bool> boolPacked_ = new pbc::RepeatedField<bool>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<bool> BoolPacked {
       get { return boolPacked_; }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as Mess);
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public bool Equals(Mess other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -542,6 +636,7 @@ namespace Test {
       return true;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
       if (DoubleVal != 0D) hash ^= DoubleVal.GetHashCode();
@@ -590,10 +685,12 @@ namespace Test {
       return hash;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override string ToString() {
-      return pb::JsonFormatter.Default.Format(this);
+      return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
       if (DoubleVal != 0D) {
         output.WriteRawTag(9);
@@ -685,6 +782,7 @@ namespace Test {
       boolPacked_.WriteTo(output, _repeated_boolPacked_codec);
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
       if (DoubleVal != 0D) {
@@ -763,6 +861,7 @@ namespace Test {
       return size;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(Mess other) {
       if (other == null) {
         return;
@@ -842,6 +941,7 @@ namespace Test {
       boolPacked_.Add(other.boolPacked_);
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -1053,25 +1153,29 @@ namespace Test {
 
   }
 
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   public sealed partial class SuperMess : pb::IMessage<SuperMess> {
     private static readonly pb::MessageParser<SuperMess> _parser = new pb::MessageParser<SuperMess>(() => new SuperMess());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<SuperMess> Parser { get { return _parser; } }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Test.Test.Descriptor.MessageTypes[1]; }
+      get { return global::Test.TestReflection.Descriptor.MessageTypes[1]; }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public SuperMess() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public SuperMess(SuperMess other) : this() {
       int32Val_ = other.int32Val_;
       MessVal = other.messVal_ != null ? other.MessVal.Clone() : null;
@@ -1081,12 +1185,15 @@ namespace Test {
       stringVal_ = other.stringVal_;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public SuperMess Clone() {
       return new SuperMess(this);
     }
 
+    /// <summary>Field number for the "Int32Val" field.</summary>
     public const int Int32ValFieldNumber = 1;
     private int int32Val_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int Int32Val {
       get { return int32Val_; }
       set {
@@ -1094,8 +1201,10 @@ namespace Test {
       }
     }
 
+    /// <summary>Field number for the "MessVal" field.</summary>
     public const int MessValFieldNumber = 2;
     private global::Test.Mess messVal_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::Test.Mess MessVal {
       get { return messVal_; }
       set {
@@ -1103,43 +1212,53 @@ namespace Test {
       }
     }
 
+    /// <summary>Field number for the "DoubleArr" field.</summary>
     public const int DoubleArrFieldNumber = 101;
     private static readonly pb::FieldCodec<double> _repeated_doubleArr_codec
         = pb::FieldCodec.ForDouble(810);
     private readonly pbc::RepeatedField<double> doubleArr_ = new pbc::RepeatedField<double>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<double> DoubleArr {
       get { return doubleArr_; }
     }
 
+    /// <summary>Field number for the "MessArr" field.</summary>
     public const int MessArrFieldNumber = 102;
     private static readonly pb::FieldCodec<global::Test.Mess> _repeated_messArr_codec
         = pb::FieldCodec.ForMessage(818, global::Test.Mess.Parser);
     private readonly pbc::RepeatedField<global::Test.Mess> messArr_ = new pbc::RepeatedField<global::Test.Mess>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Test.Mess> MessArr {
       get { return messArr_; }
     }
 
+    /// <summary>Field number for the "Int64Packed" field.</summary>
     public const int Int64PackedFieldNumber = 201;
     private static readonly pb::FieldCodec<long> _repeated_int64Packed_codec
         = pb::FieldCodec.ForInt64(1610);
     private readonly pbc::RepeatedField<long> int64Packed_ = new pbc::RepeatedField<long>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<long> Int64Packed {
       get { return int64Packed_; }
     }
 
+    /// <summary>Field number for the "StringVal" field.</summary>
     public const int StringValFieldNumber = 301;
     private string stringVal_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string StringVal {
       get { return stringVal_; }
       set {
-        stringVal_ = pb::Preconditions.CheckNotNull(value, "value");
+        stringVal_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as SuperMess);
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public bool Equals(SuperMess other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -1156,6 +1275,7 @@ namespace Test {
       return true;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
       if (Int32Val != 0) hash ^= Int32Val.GetHashCode();
@@ -1167,10 +1287,12 @@ namespace Test {
       return hash;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override string ToString() {
-      return pb::JsonFormatter.Default.Format(this);
+      return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
       if (Int32Val != 0) {
         output.WriteRawTag(8);
@@ -1189,6 +1311,7 @@ namespace Test {
       }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
       if (Int32Val != 0) {
@@ -1206,6 +1329,7 @@ namespace Test {
       return size;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(SuperMess other) {
       if (other == null) {
         return;
@@ -1227,6 +1351,7 @@ namespace Test {
       }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {

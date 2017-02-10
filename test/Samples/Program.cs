@@ -1,17 +1,14 @@
 ﻿using Gerakul.ProtoBufSerializer;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Samples
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             WriteSample();
             ReadSample();
@@ -30,6 +27,8 @@ namespace Samples
             room.People.Add(new Person() { Age = 33, Height = 160, Weight = 53.2, Name = "Ann", Phone = "111-22-33" });
 
             var roomDescriptor = Room.CreateDescriptor();
+
+            var ud = (IUntypedMessageDescriptor)roomDescriptor;
 
             byte[] buff = roomDescriptor.Write(room);
         }
@@ -86,4 +85,5 @@ namespace Samples
             return MessageDescriptor<Room>.Create(settings);
         }
     }
+
 }

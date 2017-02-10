@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0-*",
+  "testRunner": "mstest",
+
+  "dependencies": {
+    "dotnet-test-mstest": "1.1.2-preview",
+    "Gerakul.ProtoBufSerializer": { "target": "project" },
+    "Google.Protobuf": "3.2.0",
+    "Microsoft.NETCore.App": "1.1.0",
+    "MSTest.TestFramework": "1.0.8-rc2"
+  },
+
+  "runtimes": {
+    "win10-x86": {},
+    "win10-x64": {}
+  },
+
+  "frameworks": {
+    "netcoreapp1.3": {
+      "imports": "dnxcore50"
+    }
+  }
+}
