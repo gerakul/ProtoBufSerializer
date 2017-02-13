@@ -42,6 +42,21 @@ namespace Gerakul.ProtoBufSerializer
             }
         }
 
+        public bool TryAdd(IUntypedMessageDescriptor item, string name = "")
+        {
+            lock (lockObject)
+            {
+                var subDict = GetSubDict(item, true);
+                if (!subDict.ContainsKey(name))
+                {
+                    subDict.Add(name, item);
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
         public void AddRange(IEnumerable<MessageDescriptorEntry> entries)
         {
             lock (lockObject)
@@ -54,6 +69,25 @@ namespace Gerakul.ProtoBufSerializer
             }
         }
 
+        public int TryAddRange(IEnumerable<MessageDescriptorEntry> entries)
+        {
+            int num = 0;
+            lock (lockObject)
+            {
+                foreach (var item in entries)
+                {
+                    var subDict = GetSubDict(item.MessageDescriptor, true);
+                    if (!subDict.ContainsKey(item.Name))
+                    {
+                        subDict.Add(item.Name, item.MessageDescriptor);
+                        num++;
+                    }
+                }
+            }
+
+            return num;
+        }
+
         public void AddRange(IEnumerable<IUntypedMessageDescriptor> descriptors)
         {
             lock (lockObject)
@@ -64,6 +98,25 @@ namespace Gerakul.ProtoBufSerializer
                     subDict.Add("", item);
                 }
             }
+        }
+
+        public int TryAddRange(IEnumerable<IUntypedMessageDescriptor> descriptors)
+        {
+            int num = 0;
+            lock (lockObject)
+            {
+                foreach (var item in descriptors)
+                {
+                    var subDict = GetSubDict(item, true);
+                    if (!subDict.ContainsKey(""))
+                    {
+                        subDict.Add("", item);
+                        num++;
+                    }
+                }
+            }
+
+            return num;
         }
 
         public bool Contains(Type argumentType, string name = "")
