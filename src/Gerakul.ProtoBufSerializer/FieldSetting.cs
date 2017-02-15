@@ -62,6 +62,19 @@ namespace Gerakul.ProtoBufSerializer
             }
         }
 
+        private static void CheckEnumType<E>()
+        {
+            if (!typeof(E).GetTypeInfo().IsEnum)
+            {
+                throw new ArgumentException($"Type {typeof(E)} must be Enum");
+            }
+
+            if (!Enum.GetUnderlyingType(typeof(E)).Equals(typeof(int)))
+            {
+                throw new ArgumentException($"Underlying type of enum {typeof(E)} must be {typeof(int)}");
+            }
+        }
+
         #region One value
 
         private static FieldSetting<T> CreateValue(int fieldNum, WireType wireType, Action<T, BasicSerializer, byte[]> writeAction, Action<T, BasicDeserializer> readActionWithoutTag, Func<T, bool> hasValueFunc)
@@ -175,20 +188,8 @@ namespace Gerakul.ProtoBufSerializer
 
         public static FieldSetting<T> CreateEnum<E>(int fieldNum, Func<T, E> valueGetter, Action<T, E> valueSetter, Func<T, bool> hasValueFunc = null)
         {
-            if (!typeof(E).GetTypeInfo().IsEnum)
-            {
-                throw new ArgumentException($"Type {typeof(E)} must be Enum");
-            }
-
-            if (!Enum.GetUnderlyingType(typeof(E)).Equals(typeof(int)))
-            {
-                throw new ArgumentException($"Underlying type of enum {typeof(E)} must be {typeof(int)}");
-            }
-
-            return CreateValue(fieldNum, WireType.Varint,
-                (value, serializer, rawTag) => { serializer.WriteRawTag(rawTag); serializer.WriteInt32(valueGetter(value).CastTo<int>()); },
-                (value, serializer) => valueSetter(value, serializer.ReadInt32().CastTo<E>()),
-                hasValueFunc);
+            CheckEnumType<E>();
+            return CreateInt32(fieldNum, x => valueGetter(x).CastTo<int>(), (x, y) => valueSetter(x, y.CastTo<E>()), hasValueFunc);
         }
 
         public static FieldSetting<T> CreateString(int fieldNum, Func<T, string> valueGetter, Action<T, string> valueSetter, Func<T, bool> hasValueFunc = null)
@@ -349,6 +350,12 @@ namespace Gerakul.ProtoBufSerializer
         {
             return CreateArray(fieldNum, WireType.Varint, valueGetter, oneValueSetter, (value, serializer) => oneValueSetter(value, serializer.ReadBool()), hasValueFunc, 
                 (ser, val) => ser.WriteBool(val), ser => ser.ReadBool(), canReadPacked);
+        }
+
+        public static FieldSetting<T> CreateEnumArray<E>(int fieldNum, Func<T, IEnumerable<E>> valueGetter, Action<T, E> oneValueSetter, Func<T, bool> hasValueFunc = null, bool canReadPacked = true)
+        {
+            CheckEnumType<E>();
+            return CreateInt32Array(fieldNum, x => valueGetter(x).Cast<int>(), (x, y) => oneValueSetter(x, y.CastTo<E>()), hasValueFunc, canReadPacked);
         }
 
         public static FieldSetting<T> CreateStringArray(int fieldNum, Func<T, IEnumerable<string>> valueGetter, Action<T, string> oneValueSetter, Func<T, bool> hasValueFunc = null)
@@ -542,6 +549,14 @@ namespace Gerakul.ProtoBufSerializer
             return CreatePackedArray(fieldNum, WireType.Varint, valueGetter, oneValueSetter, (value, serializer) => oneValueSetter(value, serializer.ReadBool()),
                 hasValueFunc, (ser, val) => ser.WriteBool(val), ser => ser.ReadBool(), canReadUnpacked);
         }
+
+        public static FieldSetting<T> CreateEnumPackedArray<E>(int fieldNum, Func<T, IEnumerable<E>> valueGetter,
+            Action<T, E> oneValueSetter, Func<T, bool> hasValueFunc = null, bool canReadUnpacked = true)
+        {
+            CheckEnumType<E>();
+            return CreateInt32PackedArray(fieldNum, x => valueGetter(x).Cast<int>(), (x, y) => oneValueSetter(x, y.CastTo<E>()), hasValueFunc, canReadUnpacked);
+        }
+
 
         #endregion
 
