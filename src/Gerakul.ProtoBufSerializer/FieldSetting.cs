@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,6 +10,8 @@ namespace Gerakul.ProtoBufSerializer
 {
     public class FieldSetting<T>
     {
+        private static Type[] allowableEnumTypes = { typeof(byte), typeof(sbyte), typeof(short), typeof(ushort), typeof(int) };
+
         public int FieldNum { get; private set; }
         public uint Tag { get; private set; }
         internal byte[] RawTag { get; private set; }
@@ -167,6 +170,24 @@ namespace Gerakul.ProtoBufSerializer
             return CreateValue(fieldNum, WireType.Varint,
                 (value, serializer, rawTag) => { serializer.WriteRawTag(rawTag); serializer.WriteBool(valueGetter(value)); },
                 (value, serializer) => valueSetter(value, serializer.ReadBool()),
+                hasValueFunc);
+        }
+
+        public static FieldSetting<T> CreateEnum<E>(int fieldNum, Func<T, E> valueGetter, Action<T, E> valueSetter, Func<T, bool> hasValueFunc = null)
+        {
+            if (!typeof(E).GetTypeInfo().IsEnum)
+            {
+                throw new ArgumentException($"Type {typeof(E)} must be Enum");
+            }
+
+            if (!Enum.GetUnderlyingType(typeof(E)).Equals(typeof(int)))
+            {
+                throw new ArgumentException($"Underlying type of enum {typeof(E)} must be {typeof(int)}");
+            }
+
+            return CreateValue(fieldNum, WireType.Varint,
+                (value, serializer, rawTag) => { serializer.WriteRawTag(rawTag); serializer.WriteInt32(valueGetter(value).CastTo<int>()); },
+                (value, serializer) => valueSetter(value, serializer.ReadInt32().CastTo<E>()),
                 hasValueFunc);
         }
 
