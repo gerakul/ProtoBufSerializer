@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Gerakul.ProtoBufSerializer
 {
     // Класс не потокобезопасный
-    public class MessageWriter<T> : IUntypedMessageWriter, IDisposable
+    public sealed class MessageWriter<T> : IUntypedMessageWriter, IDisposable
     {
         private Action<T, BasicSerializer> writeAction;
         private MemoryStream internalStream;
@@ -60,14 +60,16 @@ namespace Gerakul.ProtoBufSerializer
             }
         }
 
-        public void Dispose()
+        public void Close()
         {
-            internalStream.Dispose();
+            internalStream?.Dispose();
 
             if (ownStream)
             {
-                stream.Dispose();
+                stream?.Dispose();
             }
+
+            GC.SuppressFinalize(this);
         }
 
         #region IUntypedMessageWriter
@@ -89,7 +91,7 @@ namespace Gerakul.ProtoBufSerializer
 
         void IDisposable.Dispose()
         {
-            Dispose();
+            Close();
         }
 
         #endregion

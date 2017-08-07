@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Gerakul.ProtoBufSerializer
 {
     // Класс не потокобезопасный
-    public class MessageReader<T> : IUntypedMessageReader, IDisposable where T : new()
+    public sealed class MessageReader<T> : IUntypedMessageReader, IDisposable where T : new()
     {
         private Func<BasicDeserializer, T> readAction;
         private Func<BasicDeserializer, int, T> lenLimitedReadAction;
@@ -46,12 +46,14 @@ namespace Gerakul.ProtoBufSerializer
             }
         }
 
-        public void Dispose()
+        public void Close()
         {
             if (ownStream)
             {
-                stream.Dispose();
+                stream?.Dispose();
             }
+
+            GC.SuppressFinalize(this);
         }
 
         #region IUntypedMessageReader
@@ -73,7 +75,7 @@ namespace Gerakul.ProtoBufSerializer
 
         void IDisposable.Dispose()
         {
-            Dispose();
+            Close();
         }
 
         #endregion
