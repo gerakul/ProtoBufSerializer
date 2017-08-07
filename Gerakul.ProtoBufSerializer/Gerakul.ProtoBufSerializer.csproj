@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard1.3;net46</TargetFrameworks>
+    <Version>1.1.2</Version>
+    <Authors>gerakul</Authors>
+    <Description>Flexibly configurable serialization and deserialization of protobuf format</Description>
+    <RepositoryUrl>https://github.com/gerakul/ProtoBufSerializer</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>  
+  </PropertyGroup>
+</Project>

@@ -1,9 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.IO;
-using System.Linq;
+﻿using Gerakul.ProtoBufSerializer;
 using Google.Protobuf;
-using Gerakul.ProtoBufSerializer;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace UnitTests
 {

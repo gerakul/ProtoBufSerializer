@@ -1,23 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AA8E1547-50F1-4173-9C65-866297C3CB25}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gerakul.ProtoBufSerializer", "Gerakul.ProtoBufSerializer\Gerakul.ProtoBufSerializer.csproj", "{FCDB8DDE-9033-4354-9B8C-1153B149D40F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B9802D46-A201-4CC3-A4C2-EF2C60997E85}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-		NuGet.config = NuGet.config
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples", "Samples\Samples.csproj", "{BFE3CEBB-9A88-44A9-A508-88856B360C3A}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Gerakul.ProtoBufSerializer", "src\Gerakul.ProtoBufSerializer\Gerakul.ProtoBufSerializer.xproj", "{AF5DD8C1-F2CF-442B-A859-91285227FF69}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E793FE6A-2C53-447A-B7D8-16C0E29BEBC9}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Samples", "test\Samples\Samples.xproj", "{14779F14-5687-4060-A071-35E86ED6137E}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "UnitTests", "test\UnitTests\UnitTests.xproj", "{EC609A6F-85C0-4547-A798-CB27B03F537C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{E60C4DF0-36AA-43CA-BF82-AA048CEE9D58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,25 +15,20 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AF5DD8C1-F2CF-442B-A859-91285227FF69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF5DD8C1-F2CF-442B-A859-91285227FF69}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF5DD8C1-F2CF-442B-A859-91285227FF69}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF5DD8C1-F2CF-442B-A859-91285227FF69}.Release|Any CPU.Build.0 = Release|Any CPU
-		{14779F14-5687-4060-A071-35E86ED6137E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{14779F14-5687-4060-A071-35E86ED6137E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{14779F14-5687-4060-A071-35E86ED6137E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{14779F14-5687-4060-A071-35E86ED6137E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EC609A6F-85C0-4547-A798-CB27B03F537C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC609A6F-85C0-4547-A798-CB27B03F537C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC609A6F-85C0-4547-A798-CB27B03F537C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC609A6F-85C0-4547-A798-CB27B03F537C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCDB8DDE-9033-4354-9B8C-1153B149D40F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCDB8DDE-9033-4354-9B8C-1153B149D40F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCDB8DDE-9033-4354-9B8C-1153B149D40F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCDB8DDE-9033-4354-9B8C-1153B149D40F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFE3CEBB-9A88-44A9-A508-88856B360C3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFE3CEBB-9A88-44A9-A508-88856B360C3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFE3CEBB-9A88-44A9-A508-88856B360C3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFE3CEBB-9A88-44A9-A508-88856B360C3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E60C4DF0-36AA-43CA-BF82-AA048CEE9D58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E60C4DF0-36AA-43CA-BF82-AA048CEE9D58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E60C4DF0-36AA-43CA-BF82-AA048CEE9D58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E60C4DF0-36AA-43CA-BF82-AA048CEE9D58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{AF5DD8C1-F2CF-442B-A859-91285227FF69} = {AA8E1547-50F1-4173-9C65-866297C3CB25}
-		{14779F14-5687-4060-A071-35E86ED6137E} = {E793FE6A-2C53-447A-B7D8-16C0E29BEBC9}
-		{EC609A6F-85C0-4547-A798-CB27B03F537C} = {E793FE6A-2C53-447A-B7D8-16C0E29BEBC9}
 	EndGlobalSection
 EndGlobal
