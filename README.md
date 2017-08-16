@@ -27,26 +27,20 @@ Creating message descriptors:
 
 ```csharp
 // Person descriptor
-FieldSetting<Person>[] personSettings = new FieldSetting<Person>[]
-{
-    FieldSetting<Person>.CreateInt32(1, x => x.Age, (x, y) => x.Age = y),
-    FieldSetting<Person>.CreateInt32(2, x => x.Height, (x, y) => x.Height = y),
-    FieldSetting<Person>.CreateDouble(3, x => x.Weight, (x, y) => x.Weight = y),
-    FieldSetting<Person>.CreateString(4, x => x.Name, (x, y) => x.Name = y),
-    FieldSetting<Person>.CreateString(5, x => x.Phone, (x, y) => x.Phone = y, x => x.Phone != null)
-};
-
-var personDescr = MessageDescriptor<Person>.Create(personSettings);
+var personDescr = MessageDescriptorBuilder.New<Person>()
+    .Int32(1, x => x.Age, (x, y) => x.Age = y)
+    .Int32(2, x => x.Height, (x, y) => x.Height = y)
+    .Double(3, x => x.Weight, (x, y) => x.Weight = y)
+    .String(4, x => x.Name, (x, y) => x.Name = y)
+    .String(5, x => x.Phone, (x, y) => x.Phone = y, x => x.Phone != null)
+    .CreateDescriptor();
 
 // Room descriptor
-FieldSetting<Room>[] roomSettings = new FieldSetting<Room>[]
-{
-    FieldSetting<Room>.CreateInt32(1, x => x.Capacity, (x, y) => x.Capacity = y),
-    FieldSetting<Room>.CreateString(2, x => x.Name, (x, y) => x.Name = y),
-    FieldSetting<Room>.CreateMessageArray(3, x => x.People, (x, y) => x.People.Add(y), personDescr)
-};
-
-var roomDescr = MessageDescriptor<Room>.Create(roomSettings);
+var roomDescr = MessageDescriptorBuilder.New<Room>()
+    .Int32(1, x => x.Capacity, (x, y) => x.Capacity = y)
+    .String(2, x => x.Name, (x, y) => x.Name = y)
+    .MessageArray(3, x => x.People, (x, y) => x.People.Add(y), Person.CreateDescriptor())
+    .CreateDescriptor();
 ```
 
 Serialization and deserialization:

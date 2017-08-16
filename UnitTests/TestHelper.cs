@@ -210,209 +210,191 @@ namespace UnitTests
 
         public static MessageDescriptor<Test.Mess> CreateMessDescriptor()
         {
-            FieldSetting<Test.Mess>[] settings = new FieldSetting<Test.Mess>[]
-            {
-                FieldSetting<Test.Mess>.CreateDouble(Test.Mess.DoubleValFieldNumber, x => x.DoubleVal, (x, y) => x.DoubleVal = y),
-                FieldSetting<Test.Mess>.CreateFloat(Test.Mess.FloatValFieldNumber, x => x.FloatVal, (x, y) => x.FloatVal = y),
-                FieldSetting<Test.Mess>.CreateInt32(Test.Mess.Int32ValFieldNumber, x => x.Int32Val, (x, y) => x.Int32Val = y),
-                FieldSetting<Test.Mess>.CreateInt64(Test.Mess.Int64ValFieldNumber, x => x.Int64Val, (x, y) => x.Int64Val = y),
-                FieldSetting<Test.Mess>.CreateUInt32(Test.Mess.UInt32ValFieldNumber, x => x.UInt32Val, (x, y) => x.UInt32Val = y),
-                FieldSetting<Test.Mess>.CreateUInt64(Test.Mess.UInt64ValFieldNumber, x => x.UInt64Val, (x, y) => x.UInt64Val = y),
-                FieldSetting<Test.Mess>.CreateSInt32(Test.Mess.SInt32ValFieldNumber, x => x.SInt32Val, (x, y) => x.SInt32Val = y),
-                FieldSetting<Test.Mess>.CreateSInt64(Test.Mess.SInt64ValFieldNumber, x => x.SInt64Val, (x, y) => x.SInt64Val = y),
-                FieldSetting<Test.Mess>.CreateFixed32(Test.Mess.Fixed32ValFieldNumber, x => x.Fixed32Val, (x, y) => x.Fixed32Val = y),
-                FieldSetting<Test.Mess>.CreateFixed64(Test.Mess.Fixed64ValFieldNumber, x => x.Fixed64Val, (x, y) => x.Fixed64Val = y),
-                FieldSetting<Test.Mess>.CreateSFixed32(Test.Mess.SFixed32ValFieldNumber, x => x.SFixed32Val, (x, y) => x.SFixed32Val = y),
-                FieldSetting<Test.Mess>.CreateSFixed64(Test.Mess.SFixed64ValFieldNumber, x => x.SFixed64Val, (x, y) => x.SFixed64Val = y),
-                FieldSetting<Test.Mess>.CreateBool(Test.Mess.BoolValFieldNumber, x => x.BoolVal, (x, y) => x.BoolVal = y),
-                FieldSetting<Test.Mess>.CreateString(Test.Mess.StringValFieldNumber, x => x.StringVal, (x, y) => x.StringVal = y),
-                FieldSetting<Test.Mess>.CreateBytes(Test.Mess.BytesValFieldNumber, x => x.BytesVal.ToByteArray(), (x, y) => x.BytesVal = ByteString.CopyFrom(y)),
+            return MessageDescriptorBuilder.New<Test.Mess>()
+                .Double(Test.Mess.DoubleValFieldNumber, x => x.DoubleVal, (x, y) => x.DoubleVal = y)
+                .Float(Test.Mess.FloatValFieldNumber, x => x.FloatVal, (x, y) => x.FloatVal = y)
+                .Int32(Test.Mess.Int32ValFieldNumber, x => x.Int32Val, (x, y) => x.Int32Val = y)
+                .Int64(Test.Mess.Int64ValFieldNumber, x => x.Int64Val, (x, y) => x.Int64Val = y)
+                .UInt32(Test.Mess.UInt32ValFieldNumber, x => x.UInt32Val, (x, y) => x.UInt32Val = y)
+                .UInt64(Test.Mess.UInt64ValFieldNumber, x => x.UInt64Val, (x, y) => x.UInt64Val = y)
+                .SInt32(Test.Mess.SInt32ValFieldNumber, x => x.SInt32Val, (x, y) => x.SInt32Val = y)
+                .SInt64(Test.Mess.SInt64ValFieldNumber, x => x.SInt64Val, (x, y) => x.SInt64Val = y)
+                .Fixed32(Test.Mess.Fixed32ValFieldNumber, x => x.Fixed32Val, (x, y) => x.Fixed32Val = y)
+                .Fixed64(Test.Mess.Fixed64ValFieldNumber, x => x.Fixed64Val, (x, y) => x.Fixed64Val = y)
+                .SFixed32(Test.Mess.SFixed32ValFieldNumber, x => x.SFixed32Val, (x, y) => x.SFixed32Val = y)
+                .SFixed64(Test.Mess.SFixed64ValFieldNumber, x => x.SFixed64Val, (x, y) => x.SFixed64Val = y)
+                .Bool(Test.Mess.BoolValFieldNumber, x => x.BoolVal, (x, y) => x.BoolVal = y)
+                .String(Test.Mess.StringValFieldNumber, x => x.StringVal, (x, y) => x.StringVal = y)
+                .Bytes(Test.Mess.BytesValFieldNumber, x => x.BytesVal.ToByteArray(), (x, y) => x.BytesVal = ByteString.CopyFrom(y))
 
-                FieldSetting<Test.Mess>.CreateDoubleArray(Test.Mess.DoubleArrFieldNumber, x => x.DoubleArr, (x, y) => x.DoubleArr.Add(y)),
-                FieldSetting<Test.Mess>.CreateFloatArray(Test.Mess.FloatArrFieldNumber, x => x.FloatArr, (x, y) => x.FloatArr.Add(y)),
-                FieldSetting<Test.Mess>.CreateInt32Array(Test.Mess.Int32ArrFieldNumber, x => x.Int32Arr, (x, y) => x.Int32Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateInt64Array(Test.Mess.Int64ArrFieldNumber, x => x.Int64Arr, (x, y) => x.Int64Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateUInt32Array(Test.Mess.UInt32ArrFieldNumber, x => x.UInt32Arr, (x, y) => x.UInt32Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateUInt64Array(Test.Mess.UInt64ArrFieldNumber, x => x.UInt64Arr, (x, y) => x.UInt64Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateSInt32Array(Test.Mess.SInt32ArrFieldNumber, x => x.SInt32Arr, (x, y) => x.SInt32Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateSInt64Array(Test.Mess.SInt64ArrFieldNumber, x => x.SInt64Arr, (x, y) => x.SInt64Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateFixed32Array(Test.Mess.Fixed32ArrFieldNumber, x => x.Fixed32Arr, (x, y) => x.Fixed32Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateFixed64Array(Test.Mess.Fixed64ArrFieldNumber, x => x.Fixed64Arr, (x, y) => x.Fixed64Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateSFixed32Array(Test.Mess.SFixed32ArrFieldNumber, x => x.SFixed32Arr, (x, y) => x.SFixed32Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateSFixed64Array(Test.Mess.SFixed64ArrFieldNumber, x => x.SFixed64Arr, (x, y) => x.SFixed64Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateBoolArray(Test.Mess.BoolArrFieldNumber, x => x.BoolArr, (x, y) => x.BoolArr.Add(y)),
-                FieldSetting<Test.Mess>.CreateStringArray(Test.Mess.StringArrFieldNumber, x => x.StringArr, (x, y) => x.StringArr.Add(y)),
-                FieldSetting<Test.Mess>.CreateBytesArray(Test.Mess.BytesArrFieldNumber, x => x.BytesArr.Select(y => y.ToByteArray()), (x, y) => x.BytesArr.Add(ByteString.CopyFrom(y))),
+                .DoubleArray(Test.Mess.DoubleArrFieldNumber, x => x.DoubleArr, (x, y) => x.DoubleArr.Add(y))
+                .FloatArray(Test.Mess.FloatArrFieldNumber, x => x.FloatArr, (x, y) => x.FloatArr.Add(y))
+                .Int32Array(Test.Mess.Int32ArrFieldNumber, x => x.Int32Arr, (x, y) => x.Int32Arr.Add(y))
+                .Int64Array(Test.Mess.Int64ArrFieldNumber, x => x.Int64Arr, (x, y) => x.Int64Arr.Add(y))
+                .UInt32Array(Test.Mess.UInt32ArrFieldNumber, x => x.UInt32Arr, (x, y) => x.UInt32Arr.Add(y))
+                .UInt64Array(Test.Mess.UInt64ArrFieldNumber, x => x.UInt64Arr, (x, y) => x.UInt64Arr.Add(y))
+                .SInt32Array(Test.Mess.SInt32ArrFieldNumber, x => x.SInt32Arr, (x, y) => x.SInt32Arr.Add(y))
+                .SInt64Array(Test.Mess.SInt64ArrFieldNumber, x => x.SInt64Arr, (x, y) => x.SInt64Arr.Add(y))
+                .Fixed32Array(Test.Mess.Fixed32ArrFieldNumber, x => x.Fixed32Arr, (x, y) => x.Fixed32Arr.Add(y))
+                .Fixed64Array(Test.Mess.Fixed64ArrFieldNumber, x => x.Fixed64Arr, (x, y) => x.Fixed64Arr.Add(y))
+                .SFixed32Array(Test.Mess.SFixed32ArrFieldNumber, x => x.SFixed32Arr, (x, y) => x.SFixed32Arr.Add(y))
+                .SFixed64Array(Test.Mess.SFixed64ArrFieldNumber, x => x.SFixed64Arr, (x, y) => x.SFixed64Arr.Add(y))
+                .BoolArray(Test.Mess.BoolArrFieldNumber, x => x.BoolArr, (x, y) => x.BoolArr.Add(y))
+                .StringArray(Test.Mess.StringArrFieldNumber, x => x.StringArr, (x, y) => x.StringArr.Add(y))
+                .BytesArray(Test.Mess.BytesArrFieldNumber, x => x.BytesArr.Select(y => y.ToByteArray()), (x, y) => x.BytesArr.Add(ByteString.CopyFrom(y)))
 
-                FieldSetting<Test.Mess>.CreateDoublePackedArray(Test.Mess.DoublePackedFieldNumber, x => x.DoublePacked, (x, y) => x.DoublePacked.Add(y)),
-                FieldSetting<Test.Mess>.CreateFloatPackedArray(Test.Mess.FloatPackedFieldNumber, x => x.FloatPacked, (x, y) => x.FloatPacked.Add(y)),
-                FieldSetting<Test.Mess>.CreateInt32PackedArray(Test.Mess.Int32PackedFieldNumber, x => x.Int32Packed, (x, y) => x.Int32Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateInt64PackedArray(Test.Mess.Int64PackedFieldNumber, x => x.Int64Packed, (x, y) => x.Int64Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateUInt32PackedArray(Test.Mess.UInt32PackedFieldNumber, x => x.UInt32Packed, (x, y) => x.UInt32Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateUInt64PackedArray(Test.Mess.UInt64PackedFieldNumber, x => x.UInt64Packed, (x, y) => x.UInt64Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateSInt32PackedArray(Test.Mess.SInt32PackedFieldNumber, x => x.SInt32Packed, (x, y) => x.SInt32Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateSInt64PackedArray(Test.Mess.SInt64PackedFieldNumber, x => x.SInt64Packed, (x, y) => x.SInt64Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateFixed32PackedArray(Test.Mess.Fixed32PackedFieldNumber, x => x.Fixed32Packed, (x, y) => x.Fixed32Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateFixed64PackedArray(Test.Mess.Fixed64PackedFieldNumber, x => x.Fixed64Packed, (x, y) => x.Fixed64Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateSFixed32PackedArray(Test.Mess.SFixed32PackedFieldNumber, x => x.SFixed32Packed, (x, y) => x.SFixed32Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateSFixed64PackedArray(Test.Mess.SFixed64PackedFieldNumber, x => x.SFixed64Packed, (x, y) => x.SFixed64Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateBoolPackedArray(Test.Mess.BoolPackedFieldNumber, x => x.BoolPacked, (x, y) => x.BoolPacked.Add(y)),
-            };
-
-            return MessageDescriptor<Test.Mess>.Create(settings);
+                .DoublePackedArray(Test.Mess.DoublePackedFieldNumber, x => x.DoublePacked, (x, y) => x.DoublePacked.Add(y))
+                .FloatPackedArray(Test.Mess.FloatPackedFieldNumber, x => x.FloatPacked, (x, y) => x.FloatPacked.Add(y))
+                .Int32PackedArray(Test.Mess.Int32PackedFieldNumber, x => x.Int32Packed, (x, y) => x.Int32Packed.Add(y))
+                .Int64PackedArray(Test.Mess.Int64PackedFieldNumber, x => x.Int64Packed, (x, y) => x.Int64Packed.Add(y))
+                .UInt32PackedArray(Test.Mess.UInt32PackedFieldNumber, x => x.UInt32Packed, (x, y) => x.UInt32Packed.Add(y))
+                .UInt64PackedArray(Test.Mess.UInt64PackedFieldNumber, x => x.UInt64Packed, (x, y) => x.UInt64Packed.Add(y))
+                .SInt32PackedArray(Test.Mess.SInt32PackedFieldNumber, x => x.SInt32Packed, (x, y) => x.SInt32Packed.Add(y))
+                .SInt64PackedArray(Test.Mess.SInt64PackedFieldNumber, x => x.SInt64Packed, (x, y) => x.SInt64Packed.Add(y))
+                .Fixed32PackedArray(Test.Mess.Fixed32PackedFieldNumber, x => x.Fixed32Packed, (x, y) => x.Fixed32Packed.Add(y))
+                .Fixed64PackedArray(Test.Mess.Fixed64PackedFieldNumber, x => x.Fixed64Packed, (x, y) => x.Fixed64Packed.Add(y))
+                .SFixed32PackedArray(Test.Mess.SFixed32PackedFieldNumber, x => x.SFixed32Packed, (x, y) => x.SFixed32Packed.Add(y))
+                .SFixed64PackedArray(Test.Mess.SFixed64PackedFieldNumber, x => x.SFixed64Packed, (x, y) => x.SFixed64Packed.Add(y))
+                .BoolPackedArray(Test.Mess.BoolPackedFieldNumber, x => x.BoolPacked, (x, y) => x.BoolPacked.Add(y))
+                .CreateDescriptor();
         }
 
         public static MessageDescriptor<Test.Mess> CreateMessAllPackedDescriptor()
         {
-            FieldSetting<Test.Mess>[] settings = new FieldSetting<Test.Mess>[]
-            {
-                FieldSetting<Test.Mess>.CreateDouble(Test.Mess.DoubleValFieldNumber, x => x.DoubleVal, (x, y) => x.DoubleVal = y),
-                FieldSetting<Test.Mess>.CreateFloat(Test.Mess.FloatValFieldNumber, x => x.FloatVal, (x, y) => x.FloatVal = y),
-                FieldSetting<Test.Mess>.CreateInt32(Test.Mess.Int32ValFieldNumber, x => x.Int32Val, (x, y) => x.Int32Val = y),
-                FieldSetting<Test.Mess>.CreateInt64(Test.Mess.Int64ValFieldNumber, x => x.Int64Val, (x, y) => x.Int64Val = y),
-                FieldSetting<Test.Mess>.CreateUInt32(Test.Mess.UInt32ValFieldNumber, x => x.UInt32Val, (x, y) => x.UInt32Val = y),
-                FieldSetting<Test.Mess>.CreateUInt64(Test.Mess.UInt64ValFieldNumber, x => x.UInt64Val, (x, y) => x.UInt64Val = y),
-                FieldSetting<Test.Mess>.CreateSInt32(Test.Mess.SInt32ValFieldNumber, x => x.SInt32Val, (x, y) => x.SInt32Val = y),
-                FieldSetting<Test.Mess>.CreateSInt64(Test.Mess.SInt64ValFieldNumber, x => x.SInt64Val, (x, y) => x.SInt64Val = y),
-                FieldSetting<Test.Mess>.CreateFixed32(Test.Mess.Fixed32ValFieldNumber, x => x.Fixed32Val, (x, y) => x.Fixed32Val = y),
-                FieldSetting<Test.Mess>.CreateFixed64(Test.Mess.Fixed64ValFieldNumber, x => x.Fixed64Val, (x, y) => x.Fixed64Val = y),
-                FieldSetting<Test.Mess>.CreateSFixed32(Test.Mess.SFixed32ValFieldNumber, x => x.SFixed32Val, (x, y) => x.SFixed32Val = y),
-                FieldSetting<Test.Mess>.CreateSFixed64(Test.Mess.SFixed64ValFieldNumber, x => x.SFixed64Val, (x, y) => x.SFixed64Val = y),
-                FieldSetting<Test.Mess>.CreateBool(Test.Mess.BoolValFieldNumber, x => x.BoolVal, (x, y) => x.BoolVal = y),
-                FieldSetting<Test.Mess>.CreateString(Test.Mess.StringValFieldNumber, x => x.StringVal, (x, y) => x.StringVal = y),
-                FieldSetting<Test.Mess>.CreateBytes(Test.Mess.BytesValFieldNumber, x => x.BytesVal.ToByteArray(), (x, y) => x.BytesVal = ByteString.CopyFrom(y)),
+            return MessageDescriptorBuilder.New<Test.Mess>()
+                .Double(Test.Mess.DoubleValFieldNumber, x => x.DoubleVal, (x, y) => x.DoubleVal = y)
+                .Float(Test.Mess.FloatValFieldNumber, x => x.FloatVal, (x, y) => x.FloatVal = y)
+                .Int32(Test.Mess.Int32ValFieldNumber, x => x.Int32Val, (x, y) => x.Int32Val = y)
+                .Int64(Test.Mess.Int64ValFieldNumber, x => x.Int64Val, (x, y) => x.Int64Val = y)
+                .UInt32(Test.Mess.UInt32ValFieldNumber, x => x.UInt32Val, (x, y) => x.UInt32Val = y)
+                .UInt64(Test.Mess.UInt64ValFieldNumber, x => x.UInt64Val, (x, y) => x.UInt64Val = y)
+                .SInt32(Test.Mess.SInt32ValFieldNumber, x => x.SInt32Val, (x, y) => x.SInt32Val = y)
+                .SInt64(Test.Mess.SInt64ValFieldNumber, x => x.SInt64Val, (x, y) => x.SInt64Val = y)
+                .Fixed32(Test.Mess.Fixed32ValFieldNumber, x => x.Fixed32Val, (x, y) => x.Fixed32Val = y)
+                .Fixed64(Test.Mess.Fixed64ValFieldNumber, x => x.Fixed64Val, (x, y) => x.Fixed64Val = y)
+                .SFixed32(Test.Mess.SFixed32ValFieldNumber, x => x.SFixed32Val, (x, y) => x.SFixed32Val = y)
+                .SFixed64(Test.Mess.SFixed64ValFieldNumber, x => x.SFixed64Val, (x, y) => x.SFixed64Val = y)
+                .Bool(Test.Mess.BoolValFieldNumber, x => x.BoolVal, (x, y) => x.BoolVal = y)
+                .String(Test.Mess.StringValFieldNumber, x => x.StringVal, (x, y) => x.StringVal = y)
+                .Bytes(Test.Mess.BytesValFieldNumber, x => x.BytesVal.ToByteArray(), (x, y) => x.BytesVal = ByteString.CopyFrom(y))
 
-                FieldSetting<Test.Mess>.CreateDoublePackedArray(Test.Mess.DoubleArrFieldNumber, x => x.DoubleArr, (x, y) => x.DoubleArr.Add(y)),
-                FieldSetting<Test.Mess>.CreateFloatPackedArray(Test.Mess.FloatArrFieldNumber, x => x.FloatArr, (x, y) => x.FloatArr.Add(y)),
-                FieldSetting<Test.Mess>.CreateInt32PackedArray(Test.Mess.Int32ArrFieldNumber, x => x.Int32Arr, (x, y) => x.Int32Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateInt64PackedArray(Test.Mess.Int64ArrFieldNumber, x => x.Int64Arr, (x, y) => x.Int64Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateUInt32PackedArray(Test.Mess.UInt32ArrFieldNumber, x => x.UInt32Arr, (x, y) => x.UInt32Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateUInt64PackedArray(Test.Mess.UInt64ArrFieldNumber, x => x.UInt64Arr, (x, y) => x.UInt64Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateSInt32PackedArray(Test.Mess.SInt32ArrFieldNumber, x => x.SInt32Arr, (x, y) => x.SInt32Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateSInt64PackedArray(Test.Mess.SInt64ArrFieldNumber, x => x.SInt64Arr, (x, y) => x.SInt64Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateFixed32PackedArray(Test.Mess.Fixed32ArrFieldNumber, x => x.Fixed32Arr, (x, y) => x.Fixed32Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateFixed64PackedArray(Test.Mess.Fixed64ArrFieldNumber, x => x.Fixed64Arr, (x, y) => x.Fixed64Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateSFixed32PackedArray(Test.Mess.SFixed32ArrFieldNumber, x => x.SFixed32Arr, (x, y) => x.SFixed32Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateSFixed64PackedArray(Test.Mess.SFixed64ArrFieldNumber, x => x.SFixed64Arr, (x, y) => x.SFixed64Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateBoolPackedArray(Test.Mess.BoolArrFieldNumber, x => x.BoolArr, (x, y) => x.BoolArr.Add(y)),
-                FieldSetting<Test.Mess>.CreateStringArray(Test.Mess.StringArrFieldNumber, x => x.StringArr, (x, y) => x.StringArr.Add(y)),
-                FieldSetting<Test.Mess>.CreateBytesArray(Test.Mess.BytesArrFieldNumber, x => x.BytesArr.Select(y => y.ToByteArray()), (x, y) => x.BytesArr.Add(ByteString.CopyFrom(y))),
+                .DoublePackedArray(Test.Mess.DoubleArrFieldNumber, x => x.DoubleArr, (x, y) => x.DoubleArr.Add(y))
+                .FloatPackedArray(Test.Mess.FloatArrFieldNumber, x => x.FloatArr, (x, y) => x.FloatArr.Add(y))
+                .Int32PackedArray(Test.Mess.Int32ArrFieldNumber, x => x.Int32Arr, (x, y) => x.Int32Arr.Add(y))
+                .Int64PackedArray(Test.Mess.Int64ArrFieldNumber, x => x.Int64Arr, (x, y) => x.Int64Arr.Add(y))
+                .UInt32PackedArray(Test.Mess.UInt32ArrFieldNumber, x => x.UInt32Arr, (x, y) => x.UInt32Arr.Add(y))
+                .UInt64PackedArray(Test.Mess.UInt64ArrFieldNumber, x => x.UInt64Arr, (x, y) => x.UInt64Arr.Add(y))
+                .SInt32PackedArray(Test.Mess.SInt32ArrFieldNumber, x => x.SInt32Arr, (x, y) => x.SInt32Arr.Add(y))
+                .SInt64PackedArray(Test.Mess.SInt64ArrFieldNumber, x => x.SInt64Arr, (x, y) => x.SInt64Arr.Add(y))
+                .Fixed32PackedArray(Test.Mess.Fixed32ArrFieldNumber, x => x.Fixed32Arr, (x, y) => x.Fixed32Arr.Add(y))
+                .Fixed64PackedArray(Test.Mess.Fixed64ArrFieldNumber, x => x.Fixed64Arr, (x, y) => x.Fixed64Arr.Add(y))
+                .SFixed32PackedArray(Test.Mess.SFixed32ArrFieldNumber, x => x.SFixed32Arr, (x, y) => x.SFixed32Arr.Add(y))
+                .SFixed64PackedArray(Test.Mess.SFixed64ArrFieldNumber, x => x.SFixed64Arr, (x, y) => x.SFixed64Arr.Add(y))
+                .BoolPackedArray(Test.Mess.BoolArrFieldNumber, x => x.BoolArr, (x, y) => x.BoolArr.Add(y))
+                .StringArray(Test.Mess.StringArrFieldNumber, x => x.StringArr, (x, y) => x.StringArr.Add(y))
+                .BytesArray(Test.Mess.BytesArrFieldNumber, x => x.BytesArr.Select(y => y.ToByteArray()), (x, y) => x.BytesArr.Add(ByteString.CopyFrom(y)))
 
-                FieldSetting<Test.Mess>.CreateDoublePackedArray(Test.Mess.DoublePackedFieldNumber, x => x.DoublePacked, (x, y) => x.DoublePacked.Add(y)),
-                FieldSetting<Test.Mess>.CreateFloatPackedArray(Test.Mess.FloatPackedFieldNumber, x => x.FloatPacked, (x, y) => x.FloatPacked.Add(y)),
-                FieldSetting<Test.Mess>.CreateInt32PackedArray(Test.Mess.Int32PackedFieldNumber, x => x.Int32Packed, (x, y) => x.Int32Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateInt64PackedArray(Test.Mess.Int64PackedFieldNumber, x => x.Int64Packed, (x, y) => x.Int64Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateUInt32PackedArray(Test.Mess.UInt32PackedFieldNumber, x => x.UInt32Packed, (x, y) => x.UInt32Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateUInt64PackedArray(Test.Mess.UInt64PackedFieldNumber, x => x.UInt64Packed, (x, y) => x.UInt64Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateSInt32PackedArray(Test.Mess.SInt32PackedFieldNumber, x => x.SInt32Packed, (x, y) => x.SInt32Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateSInt64PackedArray(Test.Mess.SInt64PackedFieldNumber, x => x.SInt64Packed, (x, y) => x.SInt64Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateFixed32PackedArray(Test.Mess.Fixed32PackedFieldNumber, x => x.Fixed32Packed, (x, y) => x.Fixed32Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateFixed64PackedArray(Test.Mess.Fixed64PackedFieldNumber, x => x.Fixed64Packed, (x, y) => x.Fixed64Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateSFixed32PackedArray(Test.Mess.SFixed32PackedFieldNumber, x => x.SFixed32Packed, (x, y) => x.SFixed32Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateSFixed64PackedArray(Test.Mess.SFixed64PackedFieldNumber, x => x.SFixed64Packed, (x, y) => x.SFixed64Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateBoolPackedArray(Test.Mess.BoolPackedFieldNumber, x => x.BoolPacked, (x, y) => x.BoolPacked.Add(y)),
-            };
-
-            return MessageDescriptor<Test.Mess>.Create(settings);
+                .DoublePackedArray(Test.Mess.DoublePackedFieldNumber, x => x.DoublePacked, (x, y) => x.DoublePacked.Add(y))
+                .FloatPackedArray(Test.Mess.FloatPackedFieldNumber, x => x.FloatPacked, (x, y) => x.FloatPacked.Add(y))
+                .Int32PackedArray(Test.Mess.Int32PackedFieldNumber, x => x.Int32Packed, (x, y) => x.Int32Packed.Add(y))
+                .Int64PackedArray(Test.Mess.Int64PackedFieldNumber, x => x.Int64Packed, (x, y) => x.Int64Packed.Add(y))
+                .UInt32PackedArray(Test.Mess.UInt32PackedFieldNumber, x => x.UInt32Packed, (x, y) => x.UInt32Packed.Add(y))
+                .UInt64PackedArray(Test.Mess.UInt64PackedFieldNumber, x => x.UInt64Packed, (x, y) => x.UInt64Packed.Add(y))
+                .SInt32PackedArray(Test.Mess.SInt32PackedFieldNumber, x => x.SInt32Packed, (x, y) => x.SInt32Packed.Add(y))
+                .SInt64PackedArray(Test.Mess.SInt64PackedFieldNumber, x => x.SInt64Packed, (x, y) => x.SInt64Packed.Add(y))
+                .Fixed32PackedArray(Test.Mess.Fixed32PackedFieldNumber, x => x.Fixed32Packed, (x, y) => x.Fixed32Packed.Add(y))
+                .Fixed64PackedArray(Test.Mess.Fixed64PackedFieldNumber, x => x.Fixed64Packed, (x, y) => x.Fixed64Packed.Add(y))
+                .SFixed32PackedArray(Test.Mess.SFixed32PackedFieldNumber, x => x.SFixed32Packed, (x, y) => x.SFixed32Packed.Add(y))
+                .SFixed64PackedArray(Test.Mess.SFixed64PackedFieldNumber, x => x.SFixed64Packed, (x, y) => x.SFixed64Packed.Add(y))
+                .BoolPackedArray(Test.Mess.BoolPackedFieldNumber, x => x.BoolPacked, (x, y) => x.BoolPacked.Add(y))
+                .CreateDescriptor();
         }
 
         public static MessageDescriptor<Test.Mess> CreateMessAllUnpackedDescriptor()
         {
-            FieldSetting<Test.Mess>[] settings = new FieldSetting<Test.Mess>[]
-            {
-                FieldSetting<Test.Mess>.CreateDouble(Test.Mess.DoubleValFieldNumber, x => x.DoubleVal, (x, y) => x.DoubleVal = y),
-                FieldSetting<Test.Mess>.CreateFloat(Test.Mess.FloatValFieldNumber, x => x.FloatVal, (x, y) => x.FloatVal = y),
-                FieldSetting<Test.Mess>.CreateInt32(Test.Mess.Int32ValFieldNumber, x => x.Int32Val, (x, y) => x.Int32Val = y),
-                FieldSetting<Test.Mess>.CreateInt64(Test.Mess.Int64ValFieldNumber, x => x.Int64Val, (x, y) => x.Int64Val = y),
-                FieldSetting<Test.Mess>.CreateUInt32(Test.Mess.UInt32ValFieldNumber, x => x.UInt32Val, (x, y) => x.UInt32Val = y),
-                FieldSetting<Test.Mess>.CreateUInt64(Test.Mess.UInt64ValFieldNumber, x => x.UInt64Val, (x, y) => x.UInt64Val = y),
-                FieldSetting<Test.Mess>.CreateSInt32(Test.Mess.SInt32ValFieldNumber, x => x.SInt32Val, (x, y) => x.SInt32Val = y),
-                FieldSetting<Test.Mess>.CreateSInt64(Test.Mess.SInt64ValFieldNumber, x => x.SInt64Val, (x, y) => x.SInt64Val = y),
-                FieldSetting<Test.Mess>.CreateFixed32(Test.Mess.Fixed32ValFieldNumber, x => x.Fixed32Val, (x, y) => x.Fixed32Val = y),
-                FieldSetting<Test.Mess>.CreateFixed64(Test.Mess.Fixed64ValFieldNumber, x => x.Fixed64Val, (x, y) => x.Fixed64Val = y),
-                FieldSetting<Test.Mess>.CreateSFixed32(Test.Mess.SFixed32ValFieldNumber, x => x.SFixed32Val, (x, y) => x.SFixed32Val = y),
-                FieldSetting<Test.Mess>.CreateSFixed64(Test.Mess.SFixed64ValFieldNumber, x => x.SFixed64Val, (x, y) => x.SFixed64Val = y),
-                FieldSetting<Test.Mess>.CreateBool(Test.Mess.BoolValFieldNumber, x => x.BoolVal, (x, y) => x.BoolVal = y),
-                FieldSetting<Test.Mess>.CreateString(Test.Mess.StringValFieldNumber, x => x.StringVal, (x, y) => x.StringVal = y),
-                FieldSetting<Test.Mess>.CreateBytes(Test.Mess.BytesValFieldNumber, x => x.BytesVal.ToByteArray(), (x, y) => x.BytesVal = ByteString.CopyFrom(y)),
+            return MessageDescriptorBuilder.New<Test.Mess>()
+                .Double(Test.Mess.DoubleValFieldNumber, x => x.DoubleVal, (x, y) => x.DoubleVal = y)
+                .Float(Test.Mess.FloatValFieldNumber, x => x.FloatVal, (x, y) => x.FloatVal = y)
+                .Int32(Test.Mess.Int32ValFieldNumber, x => x.Int32Val, (x, y) => x.Int32Val = y)
+                .Int64(Test.Mess.Int64ValFieldNumber, x => x.Int64Val, (x, y) => x.Int64Val = y)
+                .UInt32(Test.Mess.UInt32ValFieldNumber, x => x.UInt32Val, (x, y) => x.UInt32Val = y)
+                .UInt64(Test.Mess.UInt64ValFieldNumber, x => x.UInt64Val, (x, y) => x.UInt64Val = y)
+                .SInt32(Test.Mess.SInt32ValFieldNumber, x => x.SInt32Val, (x, y) => x.SInt32Val = y)
+                .SInt64(Test.Mess.SInt64ValFieldNumber, x => x.SInt64Val, (x, y) => x.SInt64Val = y)
+                .Fixed32(Test.Mess.Fixed32ValFieldNumber, x => x.Fixed32Val, (x, y) => x.Fixed32Val = y)
+                .Fixed64(Test.Mess.Fixed64ValFieldNumber, x => x.Fixed64Val, (x, y) => x.Fixed64Val = y)
+                .SFixed32(Test.Mess.SFixed32ValFieldNumber, x => x.SFixed32Val, (x, y) => x.SFixed32Val = y)
+                .SFixed64(Test.Mess.SFixed64ValFieldNumber, x => x.SFixed64Val, (x, y) => x.SFixed64Val = y)
+                .Bool(Test.Mess.BoolValFieldNumber, x => x.BoolVal, (x, y) => x.BoolVal = y)
+                .String(Test.Mess.StringValFieldNumber, x => x.StringVal, (x, y) => x.StringVal = y)
+                .Bytes(Test.Mess.BytesValFieldNumber, x => x.BytesVal.ToByteArray(), (x, y) => x.BytesVal = ByteString.CopyFrom(y))
 
-                FieldSetting<Test.Mess>.CreateDoubleArray(Test.Mess.DoubleArrFieldNumber, x => x.DoubleArr, (x, y) => x.DoubleArr.Add(y)),
-                FieldSetting<Test.Mess>.CreateFloatArray(Test.Mess.FloatArrFieldNumber, x => x.FloatArr, (x, y) => x.FloatArr.Add(y)),
-                FieldSetting<Test.Mess>.CreateInt32Array(Test.Mess.Int32ArrFieldNumber, x => x.Int32Arr, (x, y) => x.Int32Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateInt64Array(Test.Mess.Int64ArrFieldNumber, x => x.Int64Arr, (x, y) => x.Int64Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateUInt32Array(Test.Mess.UInt32ArrFieldNumber, x => x.UInt32Arr, (x, y) => x.UInt32Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateUInt64Array(Test.Mess.UInt64ArrFieldNumber, x => x.UInt64Arr, (x, y) => x.UInt64Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateSInt32Array(Test.Mess.SInt32ArrFieldNumber, x => x.SInt32Arr, (x, y) => x.SInt32Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateSInt64Array(Test.Mess.SInt64ArrFieldNumber, x => x.SInt64Arr, (x, y) => x.SInt64Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateFixed32Array(Test.Mess.Fixed32ArrFieldNumber, x => x.Fixed32Arr, (x, y) => x.Fixed32Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateFixed64Array(Test.Mess.Fixed64ArrFieldNumber, x => x.Fixed64Arr, (x, y) => x.Fixed64Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateSFixed32Array(Test.Mess.SFixed32ArrFieldNumber, x => x.SFixed32Arr, (x, y) => x.SFixed32Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateSFixed64Array(Test.Mess.SFixed64ArrFieldNumber, x => x.SFixed64Arr, (x, y) => x.SFixed64Arr.Add(y)),
-                FieldSetting<Test.Mess>.CreateBoolArray(Test.Mess.BoolArrFieldNumber, x => x.BoolArr, (x, y) => x.BoolArr.Add(y)),
-                FieldSetting<Test.Mess>.CreateStringArray(Test.Mess.StringArrFieldNumber, x => x.StringArr, (x, y) => x.StringArr.Add(y)),
-                FieldSetting<Test.Mess>.CreateBytesArray(Test.Mess.BytesArrFieldNumber, x => x.BytesArr.Select(y => y.ToByteArray()), (x, y) => x.BytesArr.Add(ByteString.CopyFrom(y))),
+                .DoubleArray(Test.Mess.DoubleArrFieldNumber, x => x.DoubleArr, (x, y) => x.DoubleArr.Add(y))
+                .FloatArray(Test.Mess.FloatArrFieldNumber, x => x.FloatArr, (x, y) => x.FloatArr.Add(y))
+                .Int32Array(Test.Mess.Int32ArrFieldNumber, x => x.Int32Arr, (x, y) => x.Int32Arr.Add(y))
+                .Int64Array(Test.Mess.Int64ArrFieldNumber, x => x.Int64Arr, (x, y) => x.Int64Arr.Add(y))
+                .UInt32Array(Test.Mess.UInt32ArrFieldNumber, x => x.UInt32Arr, (x, y) => x.UInt32Arr.Add(y))
+                .UInt64Array(Test.Mess.UInt64ArrFieldNumber, x => x.UInt64Arr, (x, y) => x.UInt64Arr.Add(y))
+                .SInt32Array(Test.Mess.SInt32ArrFieldNumber, x => x.SInt32Arr, (x, y) => x.SInt32Arr.Add(y))
+                .SInt64Array(Test.Mess.SInt64ArrFieldNumber, x => x.SInt64Arr, (x, y) => x.SInt64Arr.Add(y))
+                .Fixed32Array(Test.Mess.Fixed32ArrFieldNumber, x => x.Fixed32Arr, (x, y) => x.Fixed32Arr.Add(y))
+                .Fixed64Array(Test.Mess.Fixed64ArrFieldNumber, x => x.Fixed64Arr, (x, y) => x.Fixed64Arr.Add(y))
+                .SFixed32Array(Test.Mess.SFixed32ArrFieldNumber, x => x.SFixed32Arr, (x, y) => x.SFixed32Arr.Add(y))
+                .SFixed64Array(Test.Mess.SFixed64ArrFieldNumber, x => x.SFixed64Arr, (x, y) => x.SFixed64Arr.Add(y))
+                .BoolArray(Test.Mess.BoolArrFieldNumber, x => x.BoolArr, (x, y) => x.BoolArr.Add(y))
+                .StringArray(Test.Mess.StringArrFieldNumber, x => x.StringArr, (x, y) => x.StringArr.Add(y))
+                .BytesArray(Test.Mess.BytesArrFieldNumber, x => x.BytesArr.Select(y => y.ToByteArray()), (x, y) => x.BytesArr.Add(ByteString.CopyFrom(y)))
 
-                FieldSetting<Test.Mess>.CreateDoubleArray(Test.Mess.DoublePackedFieldNumber, x => x.DoublePacked, (x, y) => x.DoublePacked.Add(y)),
-                FieldSetting<Test.Mess>.CreateFloatArray(Test.Mess.FloatPackedFieldNumber, x => x.FloatPacked, (x, y) => x.FloatPacked.Add(y)),
-                FieldSetting<Test.Mess>.CreateInt32Array(Test.Mess.Int32PackedFieldNumber, x => x.Int32Packed, (x, y) => x.Int32Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateInt64Array(Test.Mess.Int64PackedFieldNumber, x => x.Int64Packed, (x, y) => x.Int64Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateUInt32Array(Test.Mess.UInt32PackedFieldNumber, x => x.UInt32Packed, (x, y) => x.UInt32Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateUInt64Array(Test.Mess.UInt64PackedFieldNumber, x => x.UInt64Packed, (x, y) => x.UInt64Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateSInt32Array(Test.Mess.SInt32PackedFieldNumber, x => x.SInt32Packed, (x, y) => x.SInt32Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateSInt64Array(Test.Mess.SInt64PackedFieldNumber, x => x.SInt64Packed, (x, y) => x.SInt64Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateFixed32Array(Test.Mess.Fixed32PackedFieldNumber, x => x.Fixed32Packed, (x, y) => x.Fixed32Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateFixed64Array(Test.Mess.Fixed64PackedFieldNumber, x => x.Fixed64Packed, (x, y) => x.Fixed64Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateSFixed32Array(Test.Mess.SFixed32PackedFieldNumber, x => x.SFixed32Packed, (x, y) => x.SFixed32Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateSFixed64Array(Test.Mess.SFixed64PackedFieldNumber, x => x.SFixed64Packed, (x, y) => x.SFixed64Packed.Add(y)),
-                FieldSetting<Test.Mess>.CreateBoolArray(Test.Mess.BoolPackedFieldNumber, x => x.BoolPacked, (x, y) => x.BoolPacked.Add(y)),
-            };
-
-            return MessageDescriptor<Test.Mess>.Create(settings);
+                .DoubleArray(Test.Mess.DoublePackedFieldNumber, x => x.DoublePacked, (x, y) => x.DoublePacked.Add(y))
+                .FloatArray(Test.Mess.FloatPackedFieldNumber, x => x.FloatPacked, (x, y) => x.FloatPacked.Add(y))
+                .Int32Array(Test.Mess.Int32PackedFieldNumber, x => x.Int32Packed, (x, y) => x.Int32Packed.Add(y))
+                .Int64Array(Test.Mess.Int64PackedFieldNumber, x => x.Int64Packed, (x, y) => x.Int64Packed.Add(y))
+                .UInt32Array(Test.Mess.UInt32PackedFieldNumber, x => x.UInt32Packed, (x, y) => x.UInt32Packed.Add(y))
+                .UInt64Array(Test.Mess.UInt64PackedFieldNumber, x => x.UInt64Packed, (x, y) => x.UInt64Packed.Add(y))
+                .SInt32Array(Test.Mess.SInt32PackedFieldNumber, x => x.SInt32Packed, (x, y) => x.SInt32Packed.Add(y))
+                .SInt64Array(Test.Mess.SInt64PackedFieldNumber, x => x.SInt64Packed, (x, y) => x.SInt64Packed.Add(y))
+                .Fixed32Array(Test.Mess.Fixed32PackedFieldNumber, x => x.Fixed32Packed, (x, y) => x.Fixed32Packed.Add(y))
+                .Fixed64Array(Test.Mess.Fixed64PackedFieldNumber, x => x.Fixed64Packed, (x, y) => x.Fixed64Packed.Add(y))
+                .SFixed32Array(Test.Mess.SFixed32PackedFieldNumber, x => x.SFixed32Packed, (x, y) => x.SFixed32Packed.Add(y))
+                .SFixed64Array(Test.Mess.SFixed64PackedFieldNumber, x => x.SFixed64Packed, (x, y) => x.SFixed64Packed.Add(y))
+                .BoolArray(Test.Mess.BoolPackedFieldNumber, x => x.BoolPacked, (x, y) => x.BoolPacked.Add(y))
+                .CreateDescriptor();
         }
 
         public static MessageDescriptor<Test.SuperMess> CreateSuperMessDescriptor()
         {
-            FieldSetting<Test.SuperMess>[] settings = new FieldSetting<Test.SuperMess>[]
-            {
-                        FieldSetting<Test.SuperMess>.CreateInt32(Test.SuperMess.Int32ValFieldNumber, x => x.Int32Val, (x, y) => x.Int32Val = y),
-                        FieldSetting<Test.SuperMess>.CreateMessage(Test.SuperMess.MessValFieldNumber, x => x.MessVal, (x, y) => x.MessVal = y, CreateMessDescriptor()),
-                        FieldSetting<Test.SuperMess>.CreateDoubleArray(Test.SuperMess.DoubleArrFieldNumber, x => x.DoubleArr, (x, y) => x.DoubleArr.Add(y)),
-                        FieldSetting<Test.SuperMess>.CreateMessageArray(Test.SuperMess.MessArrFieldNumber, x => x.MessArr, (x, y) => x.MessArr.Add(y), CreateMessDescriptor()),
-                        FieldSetting<Test.SuperMess>.CreateInt64PackedArray(Test.SuperMess.Int64PackedFieldNumber, x => x.Int64Packed, (x, y) => x.Int64Packed.Add(y)),
-                        FieldSetting<Test.SuperMess>.CreateString(Test.SuperMess.StringValFieldNumber, x => x.StringVal, (x, y) => x.StringVal = y)
-            };
-
-            return MessageDescriptor<Test.SuperMess>.Create(settings);
+            return MessageDescriptorBuilder.New<Test.SuperMess>()
+                .Int32(Test.SuperMess.Int32ValFieldNumber, x => x.Int32Val, (x, y) => x.Int32Val = y)
+                .Message(Test.SuperMess.MessValFieldNumber, x => x.MessVal, (x, y) => x.MessVal = y, CreateMessDescriptor())
+                .DoubleArray(Test.SuperMess.DoubleArrFieldNumber, x => x.DoubleArr, (x, y) => x.DoubleArr.Add(y))
+                .MessageArray(Test.SuperMess.MessArrFieldNumber, x => x.MessArr, (x, y) => x.MessArr.Add(y), CreateMessDescriptor())
+                .Int64PackedArray(Test.SuperMess.Int64PackedFieldNumber, x => x.Int64Packed, (x, y) => x.Int64Packed.Add(y))
+                .String(Test.SuperMess.StringValFieldNumber, x => x.StringVal, (x, y) => x.StringVal = y)
+                .CreateDescriptor();
         }
 
         public static MessageDescriptor<Test.SuperMess> CreateSuperMessAllPackedDescriptor()
         {
-            FieldSetting<Test.SuperMess>[] settings = new FieldSetting<Test.SuperMess>[]
-            {
-                        FieldSetting<Test.SuperMess>.CreateInt32(Test.SuperMess.Int32ValFieldNumber, x => x.Int32Val, (x, y) => x.Int32Val = y),
-                        FieldSetting<Test.SuperMess>.CreateMessage(Test.SuperMess.MessValFieldNumber, x => x.MessVal, (x, y) => x.MessVal = y, CreateMessAllPackedDescriptor()),
-                        FieldSetting<Test.SuperMess>.CreateDoublePackedArray(Test.SuperMess.DoubleArrFieldNumber, x => x.DoubleArr, (x, y) => x.DoubleArr.Add(y)),
-                        FieldSetting<Test.SuperMess>.CreateMessageArray(Test.SuperMess.MessArrFieldNumber, x => x.MessArr, (x, y) => x.MessArr.Add(y), CreateMessAllPackedDescriptor()),
-                        FieldSetting<Test.SuperMess>.CreateInt64PackedArray(Test.SuperMess.Int64PackedFieldNumber, x => x.Int64Packed, (x, y) => x.Int64Packed.Add(y)),
-                        FieldSetting<Test.SuperMess>.CreateString(Test.SuperMess.StringValFieldNumber, x => x.StringVal, (x, y) => x.StringVal = y)
-            };
-
-            return MessageDescriptor<Test.SuperMess>.Create(settings);
+            return MessageDescriptorBuilder.New<Test.SuperMess>()
+                .Int32(Test.SuperMess.Int32ValFieldNumber, x => x.Int32Val, (x, y) => x.Int32Val = y)
+                .Message(Test.SuperMess.MessValFieldNumber, x => x.MessVal, (x, y) => x.MessVal = y, CreateMessAllPackedDescriptor())
+                .DoublePackedArray(Test.SuperMess.DoubleArrFieldNumber, x => x.DoubleArr, (x, y) => x.DoubleArr.Add(y))
+                .MessageArray(Test.SuperMess.MessArrFieldNumber, x => x.MessArr, (x, y) => x.MessArr.Add(y), CreateMessAllPackedDescriptor())
+                .Int64PackedArray(Test.SuperMess.Int64PackedFieldNumber, x => x.Int64Packed, (x, y) => x.Int64Packed.Add(y))
+                .String(Test.SuperMess.StringValFieldNumber, x => x.StringVal, (x, y) => x.StringVal = y)
+                .CreateDescriptor();
         }
 
         public static MessageDescriptor<Test.SuperMess> CreateSuperMessAllUnpackedDescriptor()
         {
-            FieldSetting<Test.SuperMess>[] settings = new FieldSetting<Test.SuperMess>[]
-            {
-                        FieldSetting<Test.SuperMess>.CreateInt32(Test.SuperMess.Int32ValFieldNumber, x => x.Int32Val, (x, y) => x.Int32Val = y),
-                        FieldSetting<Test.SuperMess>.CreateMessage(Test.SuperMess.MessValFieldNumber, x => x.MessVal, (x, y) => x.MessVal = y, CreateMessAllUnpackedDescriptor()),
-                        FieldSetting<Test.SuperMess>.CreateDoubleArray(Test.SuperMess.DoubleArrFieldNumber, x => x.DoubleArr, (x, y) => x.DoubleArr.Add(y)),
-                        FieldSetting<Test.SuperMess>.CreateMessageArray(Test.SuperMess.MessArrFieldNumber, x => x.MessArr, (x, y) => x.MessArr.Add(y), CreateMessAllUnpackedDescriptor()),
-                        FieldSetting<Test.SuperMess>.CreateInt64Array(Test.SuperMess.Int64PackedFieldNumber, x => x.Int64Packed, (x, y) => x.Int64Packed.Add(y)),
-                        FieldSetting<Test.SuperMess>.CreateString(Test.SuperMess.StringValFieldNumber, x => x.StringVal, (x, y) => x.StringVal = y)
-            };
-
-            return MessageDescriptor<Test.SuperMess>.Create(settings);
+            return MessageDescriptorBuilder.New<Test.SuperMess>()
+                .Int32(Test.SuperMess.Int32ValFieldNumber, x => x.Int32Val, (x, y) => x.Int32Val = y)
+                .Message(Test.SuperMess.MessValFieldNumber, x => x.MessVal, (x, y) => x.MessVal = y, CreateMessAllUnpackedDescriptor())
+                .DoubleArray(Test.SuperMess.DoubleArrFieldNumber, x => x.DoubleArr, (x, y) => x.DoubleArr.Add(y))
+                .MessageArray(Test.SuperMess.MessArrFieldNumber, x => x.MessArr, (x, y) => x.MessArr.Add(y), CreateMessAllUnpackedDescriptor())
+                .Int64Array(Test.SuperMess.Int64PackedFieldNumber, x => x.Int64Packed, (x, y) => x.Int64Packed.Add(y))
+                .String(Test.SuperMess.StringValFieldNumber, x => x.StringVal, (x, y) => x.StringVal = y)
+                .CreateDescriptor();
         }
 
         public static bool SerializeAndParseFromTest(MessageDescriptor<Test.SuperMess> descriptor)
