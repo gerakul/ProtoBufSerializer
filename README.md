@@ -1,7 +1,7 @@
 # ProtoBufSerializer
 This library is using concept called MessageDescriptor instead of proto file. MessageDescriptor let you describe object for serialization more flexibly than proto file. It let you use specific features of C#, for example values of type ```Nullable<T>``` which may not be put in buffer if they are NULL. 
 
-##Sample
+## Sample
 
 Declaration of classes:
 
