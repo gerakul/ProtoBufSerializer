@@ -12,6 +12,7 @@ namespace Samples
         {
             WriteSample();
             ReadSample();
+            MapSample();
         }
 
         public static void WriteSample()
@@ -38,6 +39,25 @@ namespace Samples
             var roomDescriptor = Room.CreateDescriptor();
 
             Room room = roomDescriptor.Read(buff);
+        }
+
+        private static void MapSample()
+        {
+            // approach to emulate map field
+
+            var settingsContainer = new SomeSettingsContainer();
+            settingsContainer.Name = "Container name";
+            settingsContainer.SomeSettings.Add(1, "Value1");
+            settingsContainer.SomeSettings.Add(2, "Value2");
+            settingsContainer.SomeSettings.Add(3, "Value3");
+
+            var descriptor = SomeSettingsContainer.CreateDescriptor();
+
+            // serialize
+            var buff = descriptor.Write(settingsContainer);
+
+            // deserialize
+            var newSettingsContainer = descriptor.Read(buff);
         }
     }
 
@@ -77,4 +97,41 @@ namespace Samples
         }
     }
 
+    public class SomeSettingsContainer
+    {
+        public string Name;
+        public Dictionary<int, string> SomeSettings = new Dictionary<int, string>();
+
+        public static MessageDescriptor<SomeSettingsContainer> CreateDescriptor()
+        {
+            return MessageDescriptorBuilder.New<SomeSettingsContainer>()
+                .String(1, x => x.Name, (x, y) => x.Name = y)
+                .MessageArray(2, x => x.SomeSettings.Select(y => new Map(y.Key, y.Value)), (x, y) => x.SomeSettings.Add(y.Key, y.Value), Map.CreateDescriptor())
+                .CreateDescriptor();
+        }
+    }
+
+    public class Map
+    {
+        public int Key;
+        public string Value;
+
+        public Map()
+        {
+        }
+
+        public Map(int key, string value)
+        {
+            this.Key = key;
+            this.Value = value;
+        }
+
+        public static MessageDescriptor<Map> CreateDescriptor()
+        {
+            return MessageDescriptorBuilder.New<Map>()
+                .Int32(1, x => x.Key, (x, y) => x.Key = y)
+                .String(2, x => x.Value, (x, y) => x.Value = y, x => x.Value != null)
+                .CreateDescriptor();
+        }
+    }
 }
