@@ -28,8 +28,6 @@ namespace Samples
 
             var roomDescriptor = Room.CreateDescriptor();
 
-            var ud = (IUntypedMessageDescriptor)roomDescriptor;
-
             byte[] buff = roomDescriptor.Write(room);
         }
 
