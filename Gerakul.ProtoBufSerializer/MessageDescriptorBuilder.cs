@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace Gerakul.ProtoBufSerializer
@@ -7,6 +8,8 @@ namespace Gerakul.ProtoBufSerializer
     public class MessageDescriptorBuilder<T> where T : new()
     {
         private List<FieldSetting<T>> fieldSettings = new List<FieldSetting<T>>();
+
+        public ReadOnlyCollection<FieldSetting<T>> FieldSettings => fieldSettings.AsReadOnly();
 
         internal MessageDescriptorBuilder()
         {
